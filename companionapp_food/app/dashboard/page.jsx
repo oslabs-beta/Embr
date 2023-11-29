@@ -1,7 +1,18 @@
-import Image from 'next/image'
-import styles from '../page.module.css'
+import Image from 'next/image';
+import styles from '../page.module.css';
+import multer from 'multer';
+import AWS from 'aws-sdk';
+import dotenv from 'dotenv';
 
 export default function Dashboard() {
+  dotenv.config();
+
+  AWS.config.update({
+    secretKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION,
+  });
+
   return (
     <main className={styles.dashboard}>
       <div className={styles.upload}>
@@ -26,9 +37,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className={styles.center}>
-        
-      </div>
+      <div className={styles.center}></div>
 
       <div className={styles.grid}>
         <a
@@ -82,5 +91,5 @@ export default function Dashboard() {
         </a>
       </div>
     </main>
-  )
+  );
 }
