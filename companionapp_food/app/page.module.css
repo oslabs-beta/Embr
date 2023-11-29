@@ -65,6 +65,10 @@
   box-shadow: inset 2px 2px 12px 3px rgb(88, 90, 220);
 
 }
+.selectButton {
+  margin: 1rem;
+  
+}
 .card {
   padding: 1rem 1.2rem;
   border-radius: var(--border-radius);
