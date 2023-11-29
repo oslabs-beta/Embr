@@ -5,7 +5,8 @@ export default function Display() {
 
   const placeholderImageSrcs = [
      "/cheetoSphere1.jpeg",
-    "/bananas.jpeg", "/peanuts.jpeg"];
+    "/bananas.jpeg", 
+    "/peanuts.jpeg"];
 
 //"https://snackathonfoods.com/cdn/shop/products/kirkland-signature-roasted-salted-extra-crunchy-peanuts-kirkland-signature-crunchy-16-ounce-852107_644x1500.jpg?v=1602006813",
 // "https://m.media-amazon.com/images/I/41aucKvYGDL.jpg",
@@ -27,12 +28,10 @@ export default function Display() {
   //   />);
   // }
   return (
-    <div>
+      <>
       {placeholderImageSrcs.map((img, i) => (
-          <Card img={img}></Card>
-          
-      ))}
-      
-    </div>
+        <Card img={img}></Card>  
+        ))}
+      </>
   )
 }

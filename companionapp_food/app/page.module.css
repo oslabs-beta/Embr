@@ -61,7 +61,9 @@
   margin: 2rem;
   padding: 2rem;
   border-radius: 2rem;
-  background-color: rgb(106, 24, 24);
+  background-color: rgb(18, 9, 44);
+  box-shadow: inset 2px 2px 12px 3px rgb(88, 90, 220);
+
 }
 .card {
   padding: 1rem 1.2rem;
@@ -71,7 +73,8 @@
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
-  background-color:rgb(16, 24, 75);
+  background-color:rgb(25, 32, 99);
+  box-shadow: inset 6px 8px 15px 0px rgb(4, 6, 45);
 
 }
 
@@ -99,21 +102,6 @@
   align-items: center;
   position: relative;
   padding: 4rem 0;
-}
-
-.center::before {
-  background: var(--secondary-glow);
-  border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
-}
-
-.center::after {
-  background: var(--primary-glow);
-  width: 240px;
-  height: 180px;
-  z-index: -1;
 }
 
 .center::before,

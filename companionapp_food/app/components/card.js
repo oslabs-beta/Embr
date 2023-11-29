@@ -5,9 +5,8 @@ export default function card(props) {
   return (
     <a className={styles.card} >
       <h2> Card </h2>
-      <Image src={props.img} width={300} height={300} alt = 'food'/>
+      <Image src={props.img} layout="responsive" width={200} height={200} alt = 'food'/>
       <p>snacc time</p>
     </a>
-    
   )
 }
