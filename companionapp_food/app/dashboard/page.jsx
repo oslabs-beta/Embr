@@ -23,7 +23,8 @@ export default function Dashboard() {
               height={150}
               priority
             />
-          <button className="uploadButton">Select Image..</button>
+          <button className="selectButton">Select Image..</button>
+          <button className="uploadButton">Upload Image</button>
           </a>
         </div>
       </div>
@@ -67,20 +68,6 @@ export default function Dashboard() {
             Project <span>-&gt;</span>
           </h2>
           <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Project <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
         </a>
       </div>
     </main>
