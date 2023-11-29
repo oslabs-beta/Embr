@@ -37,7 +37,7 @@
 .code {
   font-weight: 700;
   font-family: var(--font-mono);
-}
+  }
 
 .grid {
   display: grid;
@@ -45,13 +45,34 @@
   max-width: 100%;
   width: var(--max-width);
 }
+.dashboard {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: stretch;
+}
 
+.upload {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 35rem;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: rgb(106, 24, 24);
+}
 .card {
   padding: 1rem 1.2rem;
   border-radius: var(--border-radius);
+  margin: 2rem;
+  height: 14rem;
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
+  background-color:rgb(16, 24, 75);
+
 }
 
 .card span {
