@@ -62,129 +62,77 @@ app.post('/upload', upload.single('image'), (req, res) => {
   });
 });
 
-// Handle AWS CloudWatch Log query
-app.get('/getLogs', (req, res) => {
-  console.log('inside app.get(/getLogs)');
-  const cloudwatchlogs = new AWS.CloudWatchLogs();
-  const now = new Date();
-  const oneWeek = new Date(Date.now() - 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
+// Handles AWS CloudWatch Log query. consists of startQuery and getQueryResults. first we must startQuery, which starts the Query on CloudWatch and all we are getting back is a queryId variable, which is the ID of the query we just executed and now need to use that ID to pass into getQueryResults as a param to actually receive the results on our end
+// https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/titans-lambda-log-test?tab=monitoring
+app.get(
+  '/getLogs',
+  (req, res) => {
+    const cloudwatchlogs = new AWS.CloudWatchLogs();
+    const now = new Date();
+    const oneWeek = new Date(Date.now() - 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
 
-//  queryString:
-//   'fields @timestamp, @message, @logStream, @log, @initDuration | sort @timestamp desc | limit 20',
+    const params = {
+      // when we getLogs, i am wanting to grab the Timestamp, RequestId, and DurationInMS (possibly more)
+      startTime: oneWeek.getTime(),
+      endTime: now.getTime(),
+      queryString:
+        'fields @timestamp, @message, @logStream, @log | sort @timestamp desc | limit 20',
+      logGroupName: '/aws/lambda/titans-lambda-log-test',
+      // logGroupName: '/aws/lambda/thumbnail-creator',
+    };
 
+    cloudwatchlogs.startQuery(params, (err, data) => {
+      try {
+        console.log('this is the data im getting back: ', data);
+        // const { queryId } = data;
+        // after a successful startQuery, pass the queryId into the getQueryResults
+        console.log('this is data: ', data);
+       const getParams = {
+          // queryId:
+        };
+        // const getParams = data;
+        // console.log('this is data:', data);
+        console.log('this is getParams', getParams)
 
-  const params = {
-    // when we getLogs, i am wanting to grab the Timestamp, RequestId, and DurationInMS
-    // https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/titans-lambda-log-test?tab=monitoring
-    startTime: oneWeek.getTime(),
-    endTime: now.getTime(),
-    queryString:
-      'fields @timestamp, @message, @logStream, @log | sort @timestamp desc | limit 20',
-    logGroupName: '/aws/lambda/titans-lambda-log-test',
-    // limit: 50,
-  };
+        cloudwatchlogs.getQueryResults(getParams, (err, data) => {
+          try {
+            console.log('this is the data from getQueryResults: ', data);
+          } catch (err) {
+            console.error('Error from getQueryResults: ', err);
+          }
+        });
 
-  cloudwatchlogs.startQuery(params, (err, data) => {
-    if (err) console.error('THIS IS THE ERROR: ', err, err.stack); // error handler
-    else { // else get the logs by 
-      console.log(
-        'USE THE QUERY ID TO GetQueryResults, THIS IS THE QUERY ID:',
-        data
-      );
-      const getParams = {
-        queryId: '509faf9a-a7c5-4dbe-9c1b-b0490d4592c5'
-      };
-      // invoke the GetQueryResults method back with the err.requestId,
-      cloudwatchlogs.getQueryResults(getParams, (err, data) => {
-        if (err) console.error("this is the error for getQueryResults:", err, err.stack);
-        else console.log('this is the data from getQueryResults:', data);
-      })
-    }
+        // (err, data) => {
+        //         if (err) console.error("this is the error for getQueryResults:", err, err.stack);
+        //         else console.log('this is the data from getQueryResults:', data);
+        //       })
+      } catch (error) {
+        console.error('Error from startQuery', error);
+      }
+    });
+  }
+  );
+  
+  // start the server
+  app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
   });
+  
 
-  // TODO: res.status(200).send('here are the logs')
-  console.log('back outside the /getLogs in the server.js file, now ru');
-});
-
-// const queryID = '8ea94d9f-7cc8-4a86-b226-9a47a63bd255';
-// cloudwatchlogs.GetQueryResults(queryID, (err, data) => {
-//   console.log('pressed the button to GetQueryResults');
-//   if (err) console.error('This is the error inside GetQueryResults: ', err, err.stack);
-//   else { // successful
-// console.log('successful inside the else statement of GetQueryResults');
-
-//   }
-// })
-
-
-// start the server
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
-
-// ********* CHATGPT ***************
-
-// const cloudwatchlogs = new AWS.CloudWatchLogs();
-
-// const params = {
-//   startTime: ...,
-//   endTime: ...,
-//   queryString: 'your-query-string',
-//   logGroupName: 'your-log-group-name',
-// };
-
-// cloudwatchlogs.startQuery(params, (err, data) => {
-//   if (err) console.error(err, err.stack);
-//   else console.log(data);
-// });
-
-// *************************** below are from docs - https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html#startQuery-property
-
-// var params = {
-//   endTime: 'NUMBER_VALUE', /* required */
-//   queryString: 'STRING_VALUE', /* required */
-//   startTime: 'NUMBER_VALUE', /* required */
-//   limit: 'NUMBER_VALUE',
-//   logGroupIdentifiers: [
-//     'STRING_VALUE',
-//     /* more items */
-//   ],
-//   logGroupName: 'STRING_VALUE',
-//   logGroupNames: [
-//     'STRING_VALUE',
-//     /* more items */
-//   ]
-// };
-// cloudwatchlogs.startQuery(params, function(err, data) {
-//   if (err) console.log(err, err.stack); // an error occurred
-//   else     console.log(data);           // successful response
-// });
-
-// ********* mine to put
-
-// const now = Date();
-// const oneWeek = new Date(Date() - 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
-
-// const params = {
-//   startTime: oneWeek.getTime(),
-//   endTime: now.getTime(),
-//   queryString: 'fields @timestamp, @message | sort @timestamp desc | limit 20',
-//   logGroupName: '/aws/lambda/titans-lambda-log-test',
-//   // limit: 50,
-// };
-
-// cloudwatchlogs.startQuery(params, (err, data) => {
-//   if (err) console.error(err, err.stack);
-//   else console.log(data);
-// });
-
-//*** CHAT GPT*/
-// const now = new Date();
-// const oneDayAgo = new Date(now - 24 * 60 * 60 * 1000); // 24 hours ago
-
-// const params = {
-//   startTime: oneDayAgo.getTime(),
-//   endTime: now.getTime(),
-//   queryString: 'fields @timestamp, @message | sort @timestamp desc | limit 20',
-//   logGroupName: '/aws/lambda/your-function-name',
-// };
+    //   cloudwatchlogs.startQuery(params, (err, data) => {
+    //   if (err) console.error('THIS IS THE ERROR: ', err, err.stack); // error handler
+    //   else { // else get the logs by
+    //     console.log(
+    //       'USE THE QUERY ID TO GetQueryResults, THIS IS THE QUERY ID:',
+    //       data
+    //     );
+    //     const getParams = {
+    //       queryId: '509faf9a-a7c5-4dbe-9c1b-b0490d4592c5'
+    //     };
+    //     // invoke the GetQueryResults method back with the err.requestId,
+    //     cloudwatchlogs.getQueryResults(getParams, (err, data) => {
+    //       if (err) console.error("this is the error for getQueryResults:", err, err.stack);
+    //       else console.log('this is the data from getQueryResults:', data);
+    //     })
+    //   }
+    // });
