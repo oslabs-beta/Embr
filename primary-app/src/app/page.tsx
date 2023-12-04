@@ -1,4 +1,20 @@
 import Image from 'next/image'
+import { Flex, Bold, Card, Title, Text, Metric, BarList } from "@tremor/react";
+
+
+const data = [
+  {
+    name: "12:04",
+    value: 456,
+    href: "https://twitter.com/tremorlabs",
+    color: "orange",
+  },
+  {
+    name: "4:05",
+    value: 191,
+    
+  }
+];
 
 export default function Home() {
   return (
@@ -37,6 +53,26 @@ export default function Home() {
           height={37}
           priority
         />
+       
+        <Card>
+          <Flex>
+            
+            <Card>
+              <Metric>120ms</Metric>
+              <Text>init time</Text>
+            </Card>
+            <Card style={{minWidth: "260px"}} className="max-w-lg">
+
+      <Flex className="mt-4">
+        <Text>
+          <Bold>Avg. duration</Bold>
+        </Text>
+        
+      </Flex>
+    <BarList data={data} className="mt-1" />
+  </Card>
+          </Flex>
+        </Card>
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
