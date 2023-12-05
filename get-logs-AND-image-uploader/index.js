@@ -23,7 +23,7 @@ document.getElementById('getLogs').addEventListener('click', async function (eve
     // event.preventDefault();
     console.log('clicked on Get Logs button, making a GET request now');
     try{
-        const response = await fetch('/getLogs', {
+        const response = await fetch('/allData', {
             method: 'GET',
         });
         const result = await response.text();
