@@ -4,11 +4,6 @@ import Link from 'next/link';
 // import Logo from './Logo';
 // import Button from './Button';
 
-const navigation = [
-  { name: 'Dashboard', href: '/' },
-  { name: 'Functions', href: '/functions' },
-];
-
 //home page
 const home = () => {
   return (
@@ -24,13 +19,13 @@ const home = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/functions">
-                  <p>Functions</p>
+                <Link href="/contact">
+                  <p>Contact</p>
                 </Link>
               </li>
               <li>
-                <Link href="/contacts">
-                  <p>Contacts</p>
+                <Link href="/functions">
+                  <p>Functions list</p>
                 </Link>
               </li>
             </ul>
