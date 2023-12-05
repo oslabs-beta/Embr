@@ -67,16 +67,19 @@ app.post('/upload', upload.single('image'), (req, res) => {
 app.get('/allData', getData, (req, res) => {
   res.status(200).json(res.locals.data);
 });
- let lastID = ['856b4cd9-8a7a-468e-8512-79a28d83e5d5'];
- 
+let lastID = ['856b4cd9-8a7a-468e-8512-79a28d83e5d5'];
 
-
- async function getData(req, res, next) {
-//  setTimeout(() => {getData(req,res,next)}, 2000)
+async function getData(req, res, next) {
+  //  setTimeout(() => {getData(req,res,next)}, 2000)
   console.log('inside getData');
   const cloudwatchlogs = new AWS.CloudWatchLogs();
   const now = new Date();
   const oneWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
+
+  setTimeout(async() => {
+    await getData(req, res, next);
+    console.log('inside the setTIMEOUT: ', res.locals.data);
+  }, 5000);
 
   const params = {
     // when we getLogs, i am wanting to grab the Timestamp, RequestId, and DurationInMS
@@ -87,46 +90,44 @@ app.get('/allData', getData, (req, res) => {
       'fields @timestamp, @message, @logStream, @log, @initDuration, @ptr | sort @timestamp desc | limit 1 ',
     logGroupName: '/aws/lambda/ChrisTestFunc',
     // limit: 50,
-  };  
+  };
 
-  const data = await cloudwatchlogs.startQuery(params).promise()
-    const { queryId } = data;
-    lastID.push(queryId)
-    console.log(lastID)
+  const data = await cloudwatchlogs.startQuery(params).promise();
+  const { queryId } = data;
+  lastID.push(queryId);
+  console.log(lastID);
 
+  let newId = lastID[lastID.length - 2];
+  console.log({ queryId: queryId });
 
-    let newId = lastID[lastID.length - 2]
-    console.log({queryId: queryId})
+  const results = await cloudwatchlogs
+    .getQueryResults({ queryId: newId })
+    .promise();
+  console.log(results.results);
+  res.locals.data = results.results;
+  next();
 
-    const results = await cloudwatchlogs.getQueryResults({queryId: newId}).promise()
-    console.log(results.results)
-    res.locals.data = results.results;
-    next();  
+  //  setTimeout(getData, 2000)
+}
+// start the server
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
 
-
- 
-//  setTimeout(getData, 2000)       
- }
-  // start the server
-  app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-  });
-  
-
-    //   cloudwatchlogs.startQuery(params, (err, data) => {
-    //   if (err) console.error('THIS IS THE ERROR: ', err, err.stack); // error handler
-    //   else { // else get the logs by
-    //     console.log(
-    //       'USE THE QUERY ID TO GetQueryResults, THIS IS THE QUERY ID:',
-    //       data
-    //     );
-    //     const getParams = {
-    //       queryId: '509faf9a-a7c5-4dbe-9c1b-b0490d4592c5'
-    //     };
-    //     // invoke the GetQueryResults method back with the err.requestId,
-    //     cloudwatchlogs.getQueryResults(getParams, (err, data) => {
-    //       if (err) console.error("this is the error for getQueryResults:", err, err.stack);
-    //       else console.log('this is the data from getQueryResults:', data);
-    //     })
-    //   }
-    // });
+//   cloudwatchlogs.startQuery(params, (err, data) => {
+//   if (err) console.error('THIS IS THE ERROR: ', err, err.stack); // error handler
+//   else { // else get the logs by
+//     console.log(
+//       'USE THE QUERY ID TO GetQueryResults, THIS IS THE QUERY ID:',
+//       data
+//     );
+//     const getParams = {
+//       queryId: '509faf9a-a7c5-4dbe-9c1b-b0490d4592c5'
+//     };
+//     // invoke the GetQueryResults method back with the err.requestId,
+//     cloudwatchlogs.getQueryResults(getParams, (err, data) => {
+//       if (err) console.error("this is the error for getQueryResults:", err, err.stack);
+//       else console.log('this is the data from getQueryResults:', data);
+//     })
+//   }
+// });
