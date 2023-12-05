@@ -105,6 +105,7 @@ async function getData(req, res, next) {
     .promise();
   console.log(results.results);
   res.locals.data = results.results;
+  lastID.shift()
   next();
 
   //  setTimeout(getData, 2000)
