@@ -87,8 +87,8 @@ async function getData(req, res, next) {
     startTime: oneWeek.getTime(),
     endTime: now.getTime(),
     queryString:
-      'fields @ingestionTime, @logStream, @message, @timestamp, @requestId, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | filter @initDuration | sort @timestamp desc | limit 50',
-    logGroupName: '/aws/lambda/ChrisTestFunc',
+    'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 100',
+    logGroupName: '/aws/lambda/titans-lambda-log-test',
     // limit: 50,
   };
 
