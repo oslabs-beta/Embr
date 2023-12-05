@@ -22,8 +22,6 @@ export default function Dashboard() {
   //multer handler
   const upload = multer({dest: 'uploads/'});
 
-
-
   return (
     <main className={styles.dashboard}>
       <div className={styles.upload}>
