@@ -87,7 +87,7 @@ async function getData(req, res, next) {
     startTime: oneWeek.getTime(),
     endTime: now.getTime(),
     queryString:
-      'fields @timestamp, @message, @logStream, @log, @initDuration, @ptr | sort @timestamp desc | limit 1 ',
+      'fields @ingestionTime, @logStream, @message, @timestamp, @requestId, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | filter @initDuration | sort @timestamp desc | limit 50',
     logGroupName: '/aws/lambda/ChrisTestFunc',
     // limit: 50,
   };
