@@ -52,10 +52,10 @@ const home = () => {
     <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
         <Card>
           <Flex>
-          <Card style={{minWidth: "350px"}}>
-                <Title>Inovcations</Title>
+            <Card style={{minWidth: "5px"}}>
+                <Title>Invocations</Title>
             </Card>
-            <Card>
+            <Card> {/** Dot chart */}
               <Flex flexDirection='row'>
                 <Badge color={"blue"}>.</Badge>  
                 <Badge color={"orange"}>.</Badge>  
@@ -66,7 +66,7 @@ const home = () => {
                 <Badge color={"orange"}>.</Badge>  
               </Flex>
             </Card>  
-            <Card style={{minWidth: "260px"}} className="max-w-lg">
+            <Card style={{minWidth: "350px"}} className="max-w-lg"> {/** Avg. duration chart */}
               <Flex className="mt-4">
                 <Text>
                   <Bold>Avg. duration</Bold>
@@ -74,10 +74,10 @@ const home = () => {
               </Flex>
               <BarList data={data} className="mt-1" />
             </Card>
-            <Flex flexDirection='col' >
+            <Flex flexDirection='col' > {/** Column w. cold calls and avg. init time */}
               <Card decoration="left" decorationColor='gray'>
                 <Metric>20</Metric>
-                <Text>cold calls /week</Text>
+                <Text>cold calls/wk</Text>
               </Card>
               <Card decoration="left" decorationColor='gray'>
                 <Metric>120ms</Metric>
