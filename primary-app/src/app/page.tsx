@@ -1,4 +1,53 @@
 import Image from 'next/image'
+import { Flex, Bold, Card, Title, Text, Metric, BarList, Badge, AreaChart} from "@tremor/react";
+
+const data = [
+  {
+    name: "12:04",
+    value: 456,
+    href: "https://twitter.com/tremorlabs",
+    color: "orange",
+  },
+  {
+    name: "4:05",
+    value: 191,
+    
+  }
+];
+
+const chartdata = [
+  {
+    date: "Jan 22",
+    SemiAnalysis: 2890,
+    "The Pragmatic Engineer": 2338,
+  },
+  {
+    date: "Feb 22",
+    SemiAnalysis: 2756,
+    "The Pragmatic Engineer": 2103,
+  },
+  {
+    date: "Mar 22",
+    SemiAnalysis: 3322,
+    "The Pragmatic Engineer": 2194,
+  },
+  {
+    date: "Apr 22",
+    SemiAnalysis: 3470,
+    "The Pragmatic Engineer": 2108,
+  },
+  {
+    date: "May 22",
+    SemiAnalysis: 3475,
+    "The Pragmatic Engineer": 1812,
+  },
+  {
+    date: "Jun 22",
+    SemiAnalysis: 3129,
+    "The Pragmatic Engineer": 1726,
+  },
+];
+
 
 export default function Home() {
   return (
@@ -37,6 +86,50 @@ export default function Home() {
           height={37}
           priority
         />
+        <Card>
+          <Flex>
+          <Card style={{minWidth: "350px"}}>
+                <Title>Inovcations</Title>
+                <AreaChart
+                  className="h-72 mt-4"
+                  data={chartdata}
+                  index="date"
+                  categories={["Cold start", "Warm calls"]}
+                  colors={["blue", "orange"]}
+              
+                />
+            </Card>
+            <Card>
+              <Flex flexDirection='row'>
+                <Badge color={"blue"}>.</Badge>  
+                <Badge color={"orange"}>.</Badge>  
+                <Badge color={"orange"}>.</Badge>  
+                <Badge color={"orange"}>.</Badge>  
+                <Badge color={"orange"}>.</Badge>  
+                <Badge color={"orange"}>.</Badge>  
+                <Badge color={"orange"}>.</Badge>  
+              </Flex>
+            </Card>  
+            <Card style={{minWidth: "260px"}} className="max-w-lg">
+              <Flex className="mt-4">
+                <Text>
+                  <Bold>Avg. duration</Bold>
+                </Text>
+              </Flex>
+              <BarList data={data} className="mt-1" />
+            </Card>
+            <Flex flexDirection='col' >
+              <Card decoration="left" decorationColor='gray'>
+                <Metric>20</Metric>
+                <Text>cold calls /week</Text>
+              </Card>
+              <Card decoration="left" decorationColor='gray'>
+                <Metric>120ms</Metric>
+                <Text>init time</Text>
+              </Card>
+            </Flex>
+          </Flex>
+        </Card>
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
