@@ -40,8 +40,6 @@ const home = () => {
       </div>
       <div className={`${styles.fullWidthContainer} relative z-0`}>
         <Functionrow />
-        <Functionrow />
-        <Functionrow />
       </div>
     </>
   );

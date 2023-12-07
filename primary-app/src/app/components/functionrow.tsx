@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { averageInitDuration , averageColdCalls , initDurationsArray } from '../retrievedData.js';
 import { CiTimer } from 'react-icons/ci';
-
-
+import { initInfo } from '../retrievedData2.js';
+import Badges from './badges';
 import {
   Flex,
   Bold,
@@ -43,6 +43,7 @@ const warmFunction = () => {
 };
 
 const functionrow = () => {
+  const badges = [];
 
 
   return (
@@ -58,34 +59,35 @@ const functionrow = () => {
           decorationColor="gray"
         >
           <Flex>
-            <Card className="max-w-xs">
-              <Title>Invocations</Title>
+            <Card className="max-w-xs ">
+              <Title>Lambda Function</Title>
             </Card>
-            <Card className="max-w-xs">
-              <Flex className="mt-4">
+            <Card className="max-w-md">
+              < Badges />
+              {/* <Flex className="mt-4">
                 <Text>
                   <Bold>Avg. duration</Bold>
                 </Text>
               </Flex>
-              <BarList data={data} className="mt-1" />
+              <BarList data={data} className="mt-1" /> */}
             </Card>
             <Flex flexDirection="col">
               <Card
                 decoration="left"
-                decorationColor="gray"
+                decorationColor="blue"
                 className="max-w-xs"
               >
                 <Metric>{averageColdCalls}</Metric>
                   <Text>cold calls /week</Text>
                 </Card>
-                <Card decoration="left" decorationColor="gray">
-                  <Metric>{averageInitDuration}ms</Metric>
+                <Card decoration="left" decorationColor="blue" className="max-w-xs">
+                  <Metric>{averageInitDuration}</Metric>
                   <Text>average cold start</Text>
               </Card>
             </Flex>
             <div
               onClick={() => warmFunction()}
-              className="cursor-pointer text-center align-middle font-mono bg-violet-600 w-72 p-2 rounded hover:bg-blue-600"
+              className="cursor-pointer text-center align-middle font-mono bg-orange-800 w-72 p-2 rounded hover:bg-orange-500"
             >
               Warm
             </div>
