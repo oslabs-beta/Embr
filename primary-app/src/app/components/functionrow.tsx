@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-
+import { averageInitDuration , averageColdCalls , initDurationsArray } from '../retrievedData.js';
 import { CiTimer } from 'react-icons/ci';
 
 import {
@@ -39,6 +39,8 @@ const warmFunction = () => {
 };
 
 const functionrow = () => {
+
+
   return (
     <Flex flexDirection="col">
       <div className="flex flex-row items-center">
@@ -58,12 +60,12 @@ const functionrow = () => {
               </Card>
               <Flex flexDirection="col">
                 <Card decoration="left" decorationColor="gray">
-                  <Metric>20</Metric>
+                  <Metric>{averageColdCalls}</Metric>
                   <Text>cold calls /week</Text>
                 </Card>
                 <Card decoration="left" decorationColor="gray">
-                  <Metric>120ms</Metric>
-                  <Text>init time</Text>
+                  <Metric>{averageInitDuration}ms</Metric>
+                  <Text>average cold start</Text>
                 </Card>
               </Flex>
             </Flex>
