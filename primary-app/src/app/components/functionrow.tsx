@@ -2,7 +2,19 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Flex, Bold, Card, Title, Text, Metric, BarList, Button } from '@tremor/react';
+
+import { CiTimer } from 'react-icons/ci';
+
+import {
+  Flex,
+  Bold,
+  Card,
+  Title,
+  Text,
+  Metric,
+  BarList,
+  Button,
+} from '@tremor/react';
 ``;
 const data = [
   {
