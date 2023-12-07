@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../page.module.css';
+import styles from './page.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import Functionrow from './components/functionrow';
@@ -11,7 +11,7 @@ import { IoIosContact } from 'react-icons/io';
 const home = () => {
   return (
     <>
-      <div className="w-full h-20 bg-neutral-500 sticky top-0">
+      <div className="w-full h-20 bg-neutral-500 sticky top-0 z-10">
         <div className="container mx-auto px-4 h-full">
           <div className="flex justify-between items-center h-full">
             <ul className="hidden md:flex gap-x-6 text-white">
@@ -38,7 +38,7 @@ const home = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className={`${styles.fullWidthContainer} relative z-0`}>
         <Functionrow />
         <Functionrow />
         <Functionrow />
