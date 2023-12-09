@@ -1,33 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { averageInitDuration , averageColdCalls , initDurationsArray } from '../retrievedData.js';
-import { CiTimer } from 'react-icons/ci';
-import { initInfo } from '../retrievedData2.js';
+import { averageInitDuration, averageColdCalls } from '../retrievedData.js';
 import Badges from './badges';
-import {
-  Flex,
-  Bold,
-  Card,
-  Title,
-  Text,
-  Metric,
-  BarList,
-  Button,
-} from '@tremor/react';
-``;
-const data = [
-  {
-    name: '12:04',
-    value: 456,
-    color: 'orange',
-  },
-  {
-    name: '4:05',
-    value: 191,
-  },
-];
+import { Flex, Card, Title, Text, Metric } from '@tremor/react';
 
 const warmFunction = () => {
   fetch(
@@ -45,7 +21,6 @@ const warmFunction = () => {
 const functionrow = () => {
   const badges = [];
 
-
   return (
     <Flex flexDirection="col">
       <div className="flex flex-row items-center">
@@ -55,39 +30,36 @@ const functionrow = () => {
             borderRadius: '15px',
             border: '2px solid grey',
           }}
-          // decoration="bottom"
           decorationColor="gray"
         >
           <Flex>
-            <Card className="max-w-xs ">
+            <Card className="max-w-xs">
               <Title>Lambda Function</Title>
             </Card>
-            <Card className="max-w-md">
-              < Badges />
-              {/* <Flex className="mt-4">
-                <Text>
-                  <Bold>Avg. duration</Bold>
-                </Text>
-              </Flex>
-              <BarList data={data} className="mt-1" /> */}
+            <Card className="max-w-sm">
+              <Badges />
             </Card>
-            <Flex flexDirection="col">
+            <Flex flexDirection="col" className="w-96">
               <Card
                 decoration="left"
                 decorationColor="blue"
                 className="max-w-xs"
               >
                 <Metric>{averageColdCalls}</Metric>
-                  <Text>cold calls /week</Text>
-                </Card>
-                <Card decoration="left" decorationColor="blue" className="max-w-xs">
-                  <Metric>{averageInitDuration}</Metric>
-                  <Text>average cold start</Text>
+                <Text>cold calls /week</Text>
+              </Card>
+              <Card
+                decoration="left"
+                decorationColor="blue"
+                className="max-w-xs"
+              >
+                <Metric>{averageInitDuration}</Metric>
+                <Text>average cold start</Text>
               </Card>
             </Flex>
             <div
               onClick={() => warmFunction()}
-              className="cursor-pointer text-center align-middle font-mono bg-orange-800 w-72 p-2 rounded hover:bg-orange-500"
+              className="cursor-pointer text-center align-middle font-mono bg-orange-800 w-60 p-2 rounded hover:bg-orange-500"
             >
               Warm
             </div>
