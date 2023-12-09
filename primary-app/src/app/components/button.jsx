@@ -14,9 +14,7 @@ AWS.config.update({
   // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   // region: process.env.AWS_REGION
 
-  accessKeyId: 'AKIAVBUUFLGEMVEXMBI3',
-  secretAccessKey: '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',
-  region: 'us-east-2',
+ 
 });
 
 async function GetData() {
