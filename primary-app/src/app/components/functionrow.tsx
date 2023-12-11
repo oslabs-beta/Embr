@@ -1,12 +1,21 @@
-'use client'
+'use client';
 const AWS = require('aws-sdk');
 // const dotenv = require('dotenv');
 
 import React from 'react';
 import Link from 'next/link';
-import { Flex, Bold, Card, Title, Text, Metric, BarList, Button } from '@tremor/react';
+import {
+  Flex,
+  Bold,
+  Card,
+  Title,
+  Text,
+  Metric,
+  BarList,
+  Button,
+} from '@tremor/react';
 ``;
-import GetData from './button'
+import GetData from './button0';
 
 // dotenv.config();
 
@@ -62,16 +71,15 @@ import GetData from './button'
 //   //  setTimeout(getData, 2000)
 // }
 
-
 const functionrow = () => {
   return (
-    <Flex flexDirection="col">
-        <Card>
-          <Flex>
-            <Card style={{ minWidth: '350px' }}>
-              <Title>Inovcations</Title>
-            </Card>
-            {/*<Card>
+    <Flex flexDirection='col'>
+      <Card>
+        <Flex>
+          <Card style={{ minWidth: '350px' }}>
+            <Title>Inovcations</Title>
+          </Card>
+          {/*<Card>
           <Flex flexDirection="row">
             <Badge color={'blue'}>.</Badge>
             <Badge color={'orange'}>.</Badge>
@@ -82,29 +90,31 @@ const functionrow = () => {
             <Badge color={'orange'}>.</Badge>
           </Flex>
         </Card>*/}
-            <Card style={{ minWidth: '260px' }} className="max-w-lg">
-              <Flex className="mt-4">
-                <Text>
-                  <Bold>Avg. duration</Bold>
-                </Text>
-              </Flex>
-              {/* <BarList data={currentData} className="mt-1" /> */}
+          <Card style={{ minWidth: '260px' }} className='max-w-lg'>
+            <Flex className='mt-4'>
+              <Text>
+                <Bold>Avg. duration</Bold>
+              </Text>
+            </Flex>
+            {/* <BarList data={currentData} className="mt-1" /> */}
+          </Card>
+          <Flex flexDirection='col'>
+            <Card decoration='left' decorationColor='gray'>
+              <Metric>20</Metric>
+              <Text>cold calls /week</Text>
             </Card>
-            <Flex flexDirection="col">
-              <Card decoration="left" decorationColor="gray">
-                <Metric>20</Metric>
-                <Text>cold calls /week</Text>
-              </Card>
-              <Card decoration="left" decorationColor="gray">
-                <Metric>120ms</Metric>
-                <Text>init time</Text>
-              </Card>
-            </Flex> 
-              <Button onClick={GetData}>Get Data</Button>
+            <Card decoration='left' decorationColor='gray'>
+              <Metric>120ms</Metric>
+              <Text>init time</Text>
+            </Card>
           </Flex>
-        </Card>
+          <Button onClick={GetData}>Get Data</Button>
+          <Button>
+            <Link href='../home/dataPage'>More</Link>
+          </Button>
+        </Flex>
+      </Card>
     </Flex>
-   
   );
 };
 

@@ -14,7 +14,9 @@ AWS.config.update({
   // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   // region: process.env.AWS_REGION
 
- 
+  accessKeyId: 'AKIAVBUUFLGEMVEXMBI3',
+  secretAccessKey: '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',
+  region: 'us-east-2',
 });
 
 async function GetData() {
@@ -29,7 +31,7 @@ async function GetData() {
     startTime: oneWeek.getTime(),
     endTime: now.getTime(),
     queryString:
-      'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | filter @initDuration | sort @timestamp desc | limit 2000',
+      'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 50',
     logGroupName: '/aws/lambda/ChrisTestFunc',
   };
   console.log(params);
