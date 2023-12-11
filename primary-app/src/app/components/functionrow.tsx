@@ -108,10 +108,12 @@ const functionrow = () => {
               <Text>init time</Text>
             </Card>
           </Flex>
-          <Button onClick={GetData}>Get Data</Button>
-          <Button>
-            <Link href='../home/dataPage'>More</Link>
-          </Button>
+          <div>
+            <Button onClick={GetData}>Get Data</Button>
+            <Button>
+              <Link href='../home/dataPage'>More</Link>
+            </Button>
+          </div>
         </Flex>
       </Card>
     </Flex>

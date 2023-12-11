@@ -7,13 +7,9 @@ dotenv.config();
 // console.log({accessKeyId: process.env.AWS_ACCESS_KEY_ID})
 
 AWS.config.update({
-  // accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  // region: process.env.AWS_REGION
-
-  accessKeyId: 'AKIAVBUUFLGEMVEXMBI3',
-  secretAccessKey: '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',
-  region: 'us-east-2',
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region,
 });
 
 async function GetData() {

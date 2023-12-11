@@ -1,5 +1,5 @@
 // 'use client';
-import { Button } from '@tremor/react';
+import { Card, Button } from '@tremor/react';
 import React from 'react';
 
 const AWS = require('aws-sdk');
@@ -10,13 +10,9 @@ dotenv.config();
 // console.log({accessKeyId: process.env.AWS_ACCESS_KEY_ID})
 
 AWS.config.update({
-  // accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  // region: process.env.AWS_REGION
-
-  accessKeyId: 'AKIAVBUUFLGEMVEXMBI3',
-  secretAccessKey: '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',
-  region: 'us-east-2',
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region,
 });
 
 async function GetData() {
@@ -31,10 +27,10 @@ async function GetData() {
     startTime: oneWeek.getTime(),
     endTime: now.getTime(),
     queryString:
-      'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 50',
-    logGroupName: '/aws/lambda/ChrisTestFunc',
+      'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 1',
+    logGroupName: '/aws/lambda/ChrisTestFunc'
   };
-  console.log(params);
+  // console.log(params);
   await cloudwatchlogs
     .startQuery(params)
     .promise()
@@ -45,10 +41,13 @@ async function GetData() {
           .getQueryResults({ queryId: promiseData.queryId })
           .promise()
           .then((data) => {
-            console.log(data.results);
+            // console.log(data.results)
+           return data.results
           });
       }, 1000);
-    });
+    })
 }
+
+
 
 export default GetData;
