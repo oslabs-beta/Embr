@@ -5,6 +5,10 @@ const dotenv = require('dotenv');
 import React from 'react';
 import Link from 'next/link';
 import Badges from './badges';
+
+//Do not confuse this for the Tremor component (not being imported) also called 'Button'. This import is our button component.
+import Button from './Button';
+
 import { parseData, getInitInfo } from './calculations-updated';
 import {
   Flex,
@@ -14,7 +18,6 @@ import {
   Text,
   Metric,
   BarList,
-  Button,
   Badge,
 } from '@tremor/react';
 import { allowedNodeEnvironmentFlags } from 'process';
@@ -65,7 +68,7 @@ async function getData() {
 //figure out by Saturday ~ 
 
 //warm function for a specific Lambda function - triggered on button click
-const warmFunction = () => {
+const warmFunction:Function = () => {
   fetch(
     'https://k2j68xsjnc.execute-api.us-east-2.amazonaws.com/default/thumbnail-creator',
     {
@@ -132,18 +135,8 @@ const functionrow = () => {
                 <Text>average cold start</Text>
               </Card>
             </Flex>
-            <div
-              onClick={() => warmFunction()}
-              className='cursor-pointer text-center align-middle font-mono bg-orange-800 w-60 p-2 rounded hover:bg-orange-500'
-            >
-              Warm
-            </div>
-            <div
-              onClick={ () => { getData() } }
-              className='cursor-pointer text-center align-middle font-mono bg-orange-800 w-60 p-2 rounded hover:bg-orange-500'
-            >
-              getData
-            </div>
+            <Button buttonName={'Warm'} onClickFunc={warmFunction} />
+            <Button buttonName={'getData'} onClickFunc={getData} />
           </Flex>
         </Card>
       </div>
