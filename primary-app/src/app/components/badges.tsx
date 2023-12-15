@@ -1,7 +1,7 @@
 import React from 'react'
-import { initInfo } from '../retrievedData2.js';
+// import { initInfo } from '../retrievedData2.js';
 import { Badge } from '@tremor/react';
-const Badges = () => {
+const Badges = (initInfo) => {
     const getBadges = []
     console.log(initInfo);
     const lastinitinfo = initInfo[initInfo.length-1];

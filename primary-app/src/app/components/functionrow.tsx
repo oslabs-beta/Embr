@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 import React from 'react';
 import Link from 'next/link';
 import Badges from './badges';
-import { initInfo } from '../retrievedData2';
+import { parseData, getInitInfo } from './calculations-updated';
 import {
   Flex,
   Bold,
@@ -17,24 +17,23 @@ import {
   Button,
   Badge,
 } from '@tremor/react';
+import { allowedNodeEnvironmentFlags } from 'process';
 ``;
 
 dotenv.config();
-const data = [];
-
 AWS.config.update({
   accessKeyId: process.env.accessKeyId,
   secretAccessKey: process.env.secretAccessKey,
   region: process.env.region,
 });
 
-
-async function GetData() {
-  console.log('\n\n********>> inside getData <<********\n');
+//get logs from AWS using a query string and preset params.
+//(maybe refactor to include a params object from outside as well as start and end time)
+async function getData() {
   const cloudwatchlogs = new AWS.CloudWatchLogs();
   const now = new Date();
   const oneWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
-
+  let allLogs;
   const params = {
     // when we getLogs, i am wanting to grab the Timestamp, RequestId, and DurationInMS
     // https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/titans-lambda-log-test?tab=monitoring
@@ -44,25 +43,28 @@ async function GetData() {
       'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 200',
     logGroupName: '/aws/lambda/ChrisTestFunc',
   };
-  console.log(params);
+  // console.log(params);
   await cloudwatchlogs
     .startQuery(params)
     .promise()
     .then((promiseData) => {
-      console.log(promiseData.queryId);
-      setTimeout(() => {
+      // console.log(promiseData.queryId);
         cloudwatchlogs
           .getQueryResults({ queryId: promiseData.queryId })
           .promise()
           .then((data) => {
-            console.log(data.results);
-            data = data;
+            // console.log(data.results);
+            //data is promise object with results in it (arrays)
+            allLogs = data.results;
+            console.log('getData internal allLogs: ', allLogs);
           });
-      }, 1000);
     });
+    console.log('getData func allLogs:',allLogs);
+    return allLogs;
 }
+//figure out by Saturday ~ 
 
-
+//warm function for a specific Lambda function - triggered on button click
 const warmFunction = () => {
   fetch(
     'https://k2j68xsjnc.execute-api.us-east-2.amazonaws.com/default/thumbnail-creator',
@@ -75,6 +77,20 @@ const warmFunction = () => {
     .then((data) => console.log(data))
     .catch((err) => console.log(err));
 };
+
+let initInfo = [];
+
+//loadAll is there to allow incorporating more modular calculations as new metrics are calculated for display
+const loadAll = async function() {
+  const data = await getData();
+  console.log('data:',data);
+  const parsedData = parseData( data );
+  initInfo = getInitInfo(parsedData);
+  //calculate concurrent calls();
+  // console.log(initInfo);
+}
+
+loadAll();
 
 const functionrow = () => {
   const badges = [];
@@ -96,7 +112,7 @@ const functionrow = () => {
               <Title>Lambda Function</Title>
             </Card>
             <Card className='max-w-sm'>
-              <Badges />
+              {/* <Badges initInfo={initInfo}/> */}
             </Card>
             <Flex flexDirection='col' className='w-96'>
               <Card
@@ -112,7 +128,7 @@ const functionrow = () => {
                 decorationColor='blue'
                 className='max-w-xs'
               >
-                <Metric>{averageInitDuration}</Metric>
+                <Metric>{initInfo}</Metric>
                 <Text>average cold start</Text>
               </Card>
             </Flex>
@@ -123,7 +139,7 @@ const functionrow = () => {
               Warm
             </div>
             <div
-              onClick={ () => { GetData(); console.log('this is data: ', data) } }
+              onClick={ () => { getData() } }
               className='cursor-pointer text-center align-middle font-mono bg-orange-800 w-60 p-2 rounded hover:bg-orange-500'
             >
               getData
