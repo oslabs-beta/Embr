@@ -1011,22 +1011,14 @@ const getInitInfo = function (data) {
 const initInfo = getInitInfo(readableMockData);
 console.log(initInfo);
 
+// make data dynamic
+// *************** Task 1: Getting average init duration ***************
+// after getting a log of initInfo
+// take the average time for the first initDuration for the past 7 days TODO: do some mock
+// after getting 7 average first initLogs,
+  // subtract about 8 minutes and create an automatic warm function
+
+// 
+
+
 module.exports = { initInfo };
-// *************** Task 1: Getting the name of the function ************************************
-// the name of our s3 bucket is called original-dinner-time-images, the name of our function is called titans-lambda-log-function. this is obtainable through the variable params.logGroupName on server.js and is not information we query for on AWS CloudWatch
-//
-// *************** Task 2: Average duration of warm time / 24 hour scale ***********************
-
-// *************** Task 3: Inital duration (number - milliseconds) *****************************
-
-// *************** Task 4: Cold calls/ week (number) *******************************************
-
-// *************** Task 5: Average Initialization Duration (number - milliseconds ) ************
-
-// ********************************** - STRETCH - **********************************************
-
-// ********** Task 5: Average DurRun **********
-
-// ********** Task 6: Average DurCold **********
-
-// ********** Task 7: Average DurRun **********

@@ -11,7 +11,10 @@
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@tremor/react": "^3.11.1",
+    "aws-sdk": "^2.1518.0",
     "babel": "^6.23.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
