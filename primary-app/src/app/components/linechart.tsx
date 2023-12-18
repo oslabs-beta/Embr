@@ -1,46 +1,40 @@
-import { Card, Metric, Text, Divider, AreaChart } from "@tremor/react";
+import { Card, Metric, Text, Divider, AreaChart } from '@tremor/react';
 
-const data = [
-  {
-    Timestamp: 'Feb 21',
-    'Run Time': 14,
-  },
-  // ...
-  {
-    Timestamp: 'Jan 22',
-    'Run Time': 20,
-  },
-  {
-    Timestamp: 'Jan 22',
-    'Run Time': 18,
-  },
-  {
-    Timestamp: 'Jan 22',
-    'Run Time': 13,
-  },
-  {
-    Timestamp: 'Jan 22',
-    'Run Time': 19,
-  },
-];
+  const LineChart = ({ oneData }) => {
 
-const valueFormatter = (number: number | bigint) => `${Intl.NumberFormat("us").format(number).toString()} ms`;
+    const valueFormatter = (number: number | bigint) => `${Intl.NumberFormat('us').format(number).toString()} ms`;
 
-export default function LineChart() {
-  return (
-    <Card className="mx-auto">
-      <Text>titans-lambda-logs</Text>
-      <Metric>Initialization Runtime: 144ms </Metric>
-      <AreaChart
-        className="mt-8 h-44"
-        data={data}
-        categories={["Run Time"]}
-        index="Timestamp"
-        colors={["indigo"]}
-        valueFormatter={valueFormatter}
-        showYAxis={true}
-        showLegend={false}
-      />
-    </Card>
-  );
-}
+    const formatter = (info) => {
+      let result = [];
+      for (let i = 0; i < info.warmInvocationsDuration.length; i++) {
+        let entry = {
+          Timestamp: info.timestamp.slice(info.timestamp.indexOf(' ') + 1, info.timestamp.indexOf('.') - 3),
+          RunTime: info.warmInvocationsDuration[i],
+        };
+        result.push(entry);
+      }
+      return result;
+    };
+
+    const data = formatter(oneData);
+    console.log('line 54: ', data);
+
+    return (
+      <Card className='mx-auto'>
+        <Text>titans-lambda-logs</Text>
+        <Metric>Initialization Runtime: {oneData.initDuration}ms </Metric>
+        <AreaChart
+          className='mt-8 h-44'
+          data={data}
+          categories={['RunTime']}
+          index='Timestamp'
+          colors={['indigo']}
+          valueFormatter={valueFormatter}
+          showYAxis={true}
+          showLegend={true}
+        />
+      </Card>
+    );
+  };
+
+export default LineChart;

@@ -7,7 +7,9 @@ import Link from 'next/link';
 import Badges from './badges';
 import { initInfo } from '../retrievedData2';
 import { Flex, Bold, Card, Title, Text, Metric, BarList, Button, Badge } from '@tremor/react';
-import LineChart from './linechart';
+// import AllAccordions from './accordions';
+import { AccordionList } from '@tremor/react';
+import allAccordionArray from './accordions';
 ``;
 
 dotenv.config();
@@ -63,13 +65,14 @@ const warmFunction = () => {
 };
 
 const functionrow = () => {
+
   const badges = [];
   const averageColdCalls = 40;
   const averageInitDuration = 200;
   return (
     <Flex flexDirection='col'>
       <Flex flexDirection='col'>
-        <div className='flex flex-row items-center'>
+        <Card className='flex flex-row items-center'>
           <Card
             style={{
               minWidth: '75rem',
@@ -95,27 +98,27 @@ const functionrow = () => {
                   <Text>average cold start</Text>
                 </Card>
               </Flex>
-              <div
+              <Card
                 onClick={() => warmFunction()}
                 className='cursor-pointer text-center align-middle font-mono bg-orange-800 w-60 p-2 rounded hover:bg-orange-500'
               >
                 Warm
-              </div>
-              <div
+              </Card>
+              <Card
                 onClick={() => console.log('data:', getData())}
                 className='cursor-pointer text-center align-middle font-mono bg-orange-800 w-60 p-2 rounded hover:bg-orange-500'
               >
                 getData
-              </div>
+              </Card>
             </Flex>
           </Card>
-        </div>
-      <LineChart></LineChart>
+        </Card>
+        <AccordionList className='max-w-md mx-auto'>
+          { allAccordionArray }
+        </AccordionList>
       </Flex>
     </Flex>
   );
 };
 
 export default functionrow;
-
-// import create a LineChartArray and import it

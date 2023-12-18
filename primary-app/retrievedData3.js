@@ -1253,7 +1253,7 @@ const averageTimestamp = (timestampsArray, prewarm) => {
   console.log(minutesArray);
   const hoursSum = hoursArray.reduce((a, b) => a + b, 0);
   const minutesSum = minutesArray.reduce((a, b) => a + b, 0);
-// TODO: 
+// TODO: this is the first practical use of %
   const wtf = ((hoursSum / hoursArray.length) * 60 + (minutesSum / minutesArray.length));
   const prewtf = wtf - prewarmInput;
   console.log(wtf / 60); // this is hours.(minutes percentage into the hour because its 60 minute scale)
@@ -1272,15 +1272,16 @@ console.log(averageStart, averageEnd)
 module.exports = { initInfo }; // initMockData
 
 /* TODO
+
 1. separate our logs by day - i created a second variable of initMockData to have real mockData that is good for our presentation
 2. getting the average timestamp of when the first cold-start is called for each day and most traffic until EOD
 --> const [startTimestamps, endTimestamps] = endStartTraffic(initMockData)
 --> const [averageStart, averageEnd] = averageTimestamp(...timestamps..., prewarmNum (optional))
   prewarmNum is a variable defaulted to 10 minutes, allowing users to input prewarm 5-15 min before
 3. 
-4. 
+next steps: display it on the front end
+* a few dropdown charts for the initInfo
+* automatic warm switch - if ON
+  * recommends the user to set time but the default is 10 minutes
 
-
-dropdown for the graphs
-and an automatic turn on and off switch to automatically start
 */
