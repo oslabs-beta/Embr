@@ -113,6 +113,9 @@ const functionrow = () => {
             <Button>
               <Link href='../home/dataPage'>More</Link>
             </Button>
+            <Button>
+              <Link href='../home/functionList'>Get List</Link>
+            </Button>
           </div>
         </Flex>
       </Card>
