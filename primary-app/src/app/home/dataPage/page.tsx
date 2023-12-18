@@ -28,7 +28,6 @@ AWS.config.update({
   secretAccessKey: process.env.secretAccessKey,
   region: process.env.region,
 });
-let invocations = 0
 function GotData() {
   const [newData, setNewData] = useState();
 
@@ -45,7 +44,7 @@ function GotData() {
       startTime: oneWeek.getTime(),
       endTime: now.getTime(),
       queryString:
-        'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 1',
+        'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 3',
       logGroupName: '/aws/lambda/ChrisTestFunc',
     };
 
@@ -56,21 +55,6 @@ function GotData() {
       console.error('error fethcing data: ', error)
     }
   }
-
-  
-   
-      // .then((promiseData) => {
-      //   console.log('this is the queryID: ', promiseData.queryId);
-      //   setTimeout(() => {
-      //     cloudwatchlogs
-      //       .getQueryResults({ queryId: promiseData.queryId })
-      //       .promise()
-      //       .then((data) => {
-      //         setNewData(data.results);
-      //       });
-      //   }, 1000);
-      // });
-  // }
   if(!newData) {
       getData();
   }
@@ -81,11 +65,7 @@ function GotData() {
 
       <h1 style={{ color: 'black' }}>YEEAAHHH BOIII</h1>
       <div style={{ color: 'black'}}>
-      {newData ? (
-          <pre>{JSON.stringify(newData, null, 2)}</pre>
-        ) : (
-          <p>Loading...</p>
-        )}
+      {<div>{JSON.stringify(newData, null, 2)}</div>}
         Hello
       </div>
     </div>
