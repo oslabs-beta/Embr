@@ -18,8 +18,10 @@ import {
   Metric,
   BarList,
   Badge,
-  Button
+  AccordionList
+
 } from '@tremor/react';
+import allAccordionArray from './Accordions';
 import { allowedNodeEnvironmentFlags } from 'process';
 ``;
 import GetData from '../home/dataPage/page'
@@ -113,6 +115,9 @@ const functionrow = async () => {
   }
   // const gotResults = await getLogs();
 
+
+  //const gotResults = await getLogs();
+  // const initInfo = await getInitInfo(gotResults);
   const badges = [];
   const averageColdCalls = 40;
   const averageInitDuration = 200;
