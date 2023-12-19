@@ -4,7 +4,7 @@ import { LambdaClient, ListFunctionsCommand } from "@aws-sdk/client-lambda";
 import React from 'react';
 
 
-const BigPoppa = async () => {
+const getLambdaNames = async () => {
 
   const listFunctions = async () => {
     const client = new LambdaClient({});
@@ -31,7 +31,7 @@ const BigPoppa = async () => {
 
   return(
     <div style={{ color: 'black'}}>
-      This is BigPoppa
+      test text
       <div>
          {nameArray.map((el, index) => {
          return(<p key={index}>{el}</p>)
@@ -41,5 +41,4 @@ const BigPoppa = async () => {
   )
 }
 
-export default BigPoppa
-// export { listFunctions };
+export default getLambdaNames
