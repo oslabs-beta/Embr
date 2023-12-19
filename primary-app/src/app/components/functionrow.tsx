@@ -29,7 +29,7 @@ import { CloudWatchLogsClient, StartQueryCommand, GetQueryResultsCommand } from 
 
 import { LambdaClient, ListFunctionsCommand } from "@aws-sdk/client-lambda";
 
-const BigPoppa = async () => {
+const getLambdaNames = async () => {
 
   const listFunctions = async () => {
     const client = new LambdaClient({});
@@ -55,7 +55,7 @@ const BigPoppa = async () => {
 //___AWS_Start query: creates the query on AWS and returns response of queryId
 const startQueryFunc = async function(funcName) {
 
-  // const nameArray = await BigPoppa()
+  // const nameArray = await getLambdaNames()
   // console.log(nameArray)
 
     const client = new CloudWatchLogsClient({region: 'us-east-2'});
@@ -105,7 +105,7 @@ const getLogs = async function(funcName) {
 
 const functionrow = async () => {
 
-  let nameArray = await BigPoppa()
+  let nameArray = await getLambdaNames()
   let gotResults
   for(let i = 0; i < nameArray.length; i++) {
     gotResults = await getLogs(nameArray[i])
