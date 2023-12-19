@@ -18,7 +18,9 @@ import {
   Metric,
   BarList,
   Badge,
+  AccordionList
 } from '@tremor/react';
+import allAccordionArray from './Accordions';
 import { allowedNodeEnvironmentFlags } from 'process';
 ``;
 
@@ -74,7 +76,7 @@ const getLogs = async function() {
 
 const functionrow = async () => {
   const gotResults = await getLogs();
-
+  // const initInfo = await getInitInfo(gotResults);
   const badges = [];
   const averageColdCalls = 40;
   const averageInitDuration = 200;
@@ -116,6 +118,9 @@ const functionrow = async () => {
             </Flex>
             <WarmButton buttonName={'Warm'} />
           </Flex>
+          <AccordionList className='max-w-md mx-auto'>
+          { allAccordionArray }
+        </AccordionList>
         </Card>
       </div>
     </Flex>
