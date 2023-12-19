@@ -76,7 +76,7 @@ const getLogs = async function() {
 
 const functionrow = async () => {
   const gotResults = await getLogs();
-  // const initInfo = await getInitInfo(gotResults);
+  const initInfo = await getInitInfo(gotResults);
   const badges = [];
   const averageColdCalls = 40;
   const averageInitDuration = 200;
