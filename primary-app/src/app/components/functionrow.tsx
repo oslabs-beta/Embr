@@ -117,43 +117,46 @@ const functionrow = async () => {
   const averageColdCalls = 40;
   const averageInitDuration = 200;
   return (
-    <Flex flexDirection="col">
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Card>
+    <Flex flexDirection='col'>
+      <div className='flex flex-row items-center'>
+        <Card
+          style={{
+            minWidth: '75rem',
+            borderRadius: '15px',
+            border: '2px solid grey',
+          }}
+          decorationColor='gray'
+        >
           <Flex>
-            <Card style={{ minWidth: '350px' }}>
-              <Title>Inovcations</Title>
+            <Card className='max-w-xs'>
+              <Title>Lambda Function</Title>
             </Card>
-            {/*<Card>
-          <Flex flexDirection="row">
-            <Badge color={'blue'}>.</Badge>
-            <Badge color={'orange'}>.</Badge>
-            <Badge color={'orange'}>.</Badge>
-            <Badge color={'orange'}>.</Badge>
-            <Badge color={'orange'}>.</Badge>
-            <Badge color={'orange'}>.</Badge>
-            <Badge color={'orange'}>.</Badge>
-          </Flex>
-        </Card>*/}
-            <Card style={{ minWidth: '260px' }} className="max-w-lg">
-              <Flex className="mt-4">
-                <Text>
-                  <Bold>Avg. duration</Bold>
-                </Text>
-              </Flex>
-              {/* <BarList data={data} className="mt-1" /> */}
+            <Card className='max-w-sm'>
+              {/* <Badges initInfo={initInfo}/> */}
             </Card>
-            <Flex flexDirection="col">
-              <Card decoration="left" decorationColor="gray">
-                <Metric>20</Metric>
+            <Flex flexDirection='col' className='w-96'>
+              <Card
+                decoration='left'
+                decorationColor='blue'
+                className='max-w-xs'
+              >
+                <Metric>{averageColdCalls}</Metric>
                 <Text>cold calls /week</Text>
               </Card>
-              <Card decoration="left" decorationColor="gray">
-                <Metric>120ms</Metric>
-                <Text>init time</Text>
+              <Card
+                decoration='left'
+                decorationColor='blue'
+                className='max-w-xs'
+              >
+                {/* <Metric>{initInfo}</Metric> */}
+                <Text>average cold start</Text>
               </Card>
             </Flex>
+            <WarmButton buttonName={'Warm'} />
           </Flex>
+          <AccordionList className='max-w-md mx-auto'>
+          { allAccordionArray }
+        </AccordionList>
         </Card>
       </div>
     </Flex>
