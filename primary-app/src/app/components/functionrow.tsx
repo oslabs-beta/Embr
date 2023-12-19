@@ -141,7 +141,7 @@ const functionrow = async () => {
                   <Bold>Avg. duration</Bold>
                 </Text>
               </Flex>
-              <BarList data={data} className="mt-1" />
+              {/* <BarList data={data} className="mt-1" /> */}
             </Card>
             <Flex flexDirection="col">
               <Card decoration="left" decorationColor="gray">
