@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "^3.476.0",
     "@aws-sdk/client-lambda": "^3.474.0",
     "@heroicons/react": "^1.0.6",
     "@tremor/react": "^3.11.1",

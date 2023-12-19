@@ -1,18 +1,8 @@
-/**
- * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
-// const AWS = require('aws-sdk');
-// const dotenv = require('dotenv');
-import { LambdaClient, ListFunctionsCommand } from "@aws-sdk/client-lambda";
-// const listFunctions = () => {
-//   const client = new LambdaClient({});
-//   const command = new ListFunctionsCommand({});
 
-//   return client.send(command);
-// };
-// const list = listFunctions()
-// console.log(list)
+import { LambdaClient, ListFunctionsCommand } from "@aws-sdk/client-lambda";
+
+import React from 'react';
+
 
 const BigPoppa = async () => {
 
