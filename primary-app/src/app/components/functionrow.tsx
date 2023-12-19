@@ -1,4 +1,3 @@
-'use client';
 const AWS = require('aws-sdk');
 const dotenv = require('dotenv');
 
@@ -7,7 +6,7 @@ import Link from 'next/link';
 import Badges from './badges';
 
 //Do not confuse this for the Tremor component (not being imported) also called 'Button'. This import is our button component.
-import Button from './Button';
+import WarmButton from './WarmButton';
 
 import { parseData, getInitInfo } from './calculations-updated';
 import {
@@ -23,79 +22,59 @@ import {
 import { allowedNodeEnvironmentFlags } from 'process';
 ``;
 
-dotenv.config();
-AWS.config.update({
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
-  region: process.env.region,
-});
+//AWS Cloudwatch start and get query imports
+import { CloudWatchLogsClient, StartQueryCommand, GetQueryResultsCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
 
-//get logs from AWS using a query string and preset params.
-//(maybe refactor to include a params object from outside as well as start and end time)
-async function getData() {
-  const cloudwatchlogs = new AWS.CloudWatchLogs();
-  const now = new Date();
-  const oneWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
-  let allLogs;
-  const params = {
-    // when we getLogs, i am wanting to grab the Timestamp, RequestId, and DurationInMS
-    // https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/titans-lambda-log-test?tab=monitoring
-    startTime: oneWeek.getTime(),
+//___AWS_Start query: creates the query on AWS and returns response of queryId
+const startQueryFunc = async function() {
+    const client = new CloudWatchLogsClient({region: 'us-east-2'});
+    const oneWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
+    const now = new Date();
+    
+    const input = { // StartQueryRequest
+      logGroupName: '/aws/lambda/ChrisTestFunc',
+  startTime: oneWeek.getTime(),
     endTime: now.getTime(),
     queryString:
-      'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc | limit 200',
-    logGroupName: '/aws/lambda/ChrisTestFunc',
+      'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc',
+  limit: 15,
   };
-  // console.log(params);
-  await cloudwatchlogs
-    .startQuery(params)
-    .promise()
-    .then((promiseData) => {
-      // console.log(promiseData.queryId);
-        cloudwatchlogs
-          .getQueryResults({ queryId: promiseData.queryId })
-          .promise()
-          .then((data) => {
-            // console.log(data.results);
-            //data is promise object with results in it (arrays)
-            allLogs = data.results;
-            console.log('getData internal allLogs: ', allLogs);
-          });
-    });
-    console.log('getData func allLogs:',allLogs);
-    return allLogs;
-}
-//figure out by Saturday ~ 
-
-//warm function for a specific Lambda function - triggered on button click
-const warmFunction:Function = () => {
-  fetch(
-    'https://k2j68xsjnc.execute-api.us-east-2.amazonaws.com/default/thumbnail-creator',
-    {
-      method: 'GET',
-      mode: 'cors',
-    }
-  )
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  const command = new StartQueryCommand(input);
+  const response = await client.send(command);
+  return response;
 };
 
-let initInfo = [];
-
-//loadAll is there to allow incorporating more modular calculations as new metrics are calculated for display
-const loadAll = async function() {
-  const data = await getData();
-  console.log('data:',data);
-  const parsedData = parseData( data );
-  initInfo = getInitInfo(parsedData);
-  //calculate concurrent calls();
-  // console.log(initInfo);
+//__AWS Get query: returns logs from a AWS query via a query ID
+const getQueryFunc = async function (queryId) {
+  const client = new CloudWatchLogsClient(dotenv.config);
+  const input = { // GetQueryResultsRequest
+    queryId: queryId};
+  const command = new GetQueryResultsCommand(input);
+  const response = await client.send(command);
+  return response; //response object has many properties, the results property is the array of logs we are interested in.
+  // console.log('response:',response);
 }
 
-loadAll();
+//calls startQuery and getQuery sequentially and does some data manipulation.
+const getLogs = async function() {
+  const QueryStartResults = await startQueryFunc();
+  const queryId = QueryStartResults.queryId;
+  // console.log('V3startQuery:',QueryStartResults);
+  // console.log('QueryId:',queryId);
+  const initialQueryGetResults = await getQueryFunc(queryId);
+  console.log('initialQuery',initialQueryGetResults);
+  setTimeout(async () => {
+    let delayedQueryGetResults = await getQueryFunc(queryId); 
+    console.log(delayedQueryGetResults.results);
+    return delayedQueryGetResults.results
+  },1000);
+  //status goes from Scheduled, to Running, to Complete. or Failed/cancelled/timeout/unknown. see https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html 
+  //setTimeout gives AWS some time to run the query.
+}
 
-const functionrow = () => {
+const functionrow = async () => {
+  const gotResults = await getLogs();
+
   const badges = [];
   const averageColdCalls = 40;
   const averageInitDuration = 200;
@@ -131,12 +110,11 @@ const functionrow = () => {
                 decorationColor='blue'
                 className='max-w-xs'
               >
-                <Metric>{initInfo}</Metric>
+                {/* <Metric>{initInfo}</Metric> */}
                 <Text>average cold start</Text>
               </Card>
             </Flex>
-            <Button buttonName={'Warm'} onClickFunc={warmFunction} />
-            <Button buttonName={'getData'} onClickFunc={getData} />
+            <WarmButton buttonName={'Warm'} />
           </Flex>
         </Card>
       </div>
