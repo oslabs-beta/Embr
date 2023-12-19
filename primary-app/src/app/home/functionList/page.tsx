@@ -19,13 +19,8 @@ const BigPoppa = async () => {
 
   };
   const data = await listFunctions()
-
-  // console.log(data['Functions'])
-
   const dataList = data['Functions']
-
   const nameArray = []
-
   for(let i = 0; i < dataList.length; i++){
     nameArray.push(dataList[i]['FunctionName'])
   }
