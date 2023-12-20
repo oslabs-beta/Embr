@@ -8,7 +8,10 @@ const home = () => {
   return (
     <>
       <Navbar />
-      <div className={`${styles.fullWidthContainer} relative z-0`}>
+      <div
+        className={`${styles.fullWidthContainer} relative z-0`}
+        style={{ margin: '10px' }}
+      >
         <Functionrow />
       </div>
     </>
