@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Badges from './badges';
 
 //Do not confuse this for the Tremor component (not being imported) also called 'Button'. This import is our button component.
-// import WarmButton from './WarmButton';
+import WarmButton from './WarmButton';
 
 import { parseData, getInitInfo } from './calculations-updated';
 import {
@@ -106,9 +106,20 @@ const getLogs = async function(funcName) {
 }
 
 const functionrow = async () => {
-
+  let initInfo = [{
+    timestamp: '2023-12-14 18:18:43.243',
+    initDuration: '181.02',
+    warmInvocationsDuration: ['11.04', '1.91', '2.36', '1.92', '1.36'],
+    day: '2023-12-14',
+  },
+  {
+    timestamp: '2023-12-14 18:18:43.243',
+    initDuration: '181.02',
+    warmInvocationsDuration: ['11.04', '1.91', '2.36', '1.92', '1.36'],
+    day: '2023-12-14',
+  }];
   let nameArray = await getLambdaNames()
-  let gotResults
+  let gotResults;
   for(let i = 0; i < nameArray.length; i++) {
     gotResults = await getLogs(nameArray[i])
     setTimeout(()=> {console.log(`this is the name of the function: ${nameArray[i]}: `, gotResults)}, 2000)

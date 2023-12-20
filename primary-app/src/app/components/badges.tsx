@@ -6,8 +6,11 @@ const Badges = (initInfo) => {
     console.log(initInfo);
     const lastinitinfo = initInfo[initInfo.length-1];
     console.log('last init info:',lastinitinfo);
-    const initDuration = lastinitinfo.initDuration;
-    const warmInvocationsDuration = lastinitinfo.warmInvocationsDuration;
+    // const initDuration = lastinitinfo.initDuration;
+    const initDuration = initInfo.initDuration;
+    // const warmInvocationsDuration = lastinitinfo.warmInvocationsDuration;
+    const warmInvocationsDuration = initInfo.warmInvocationsDuration;
+    console.log(warmInvocationsDuration);
 
     // for(let i=0; i<warmInvocationsDuration.length; i++) {
     //     getBadges.push(
@@ -18,7 +21,7 @@ const Badges = (initInfo) => {
   return (
     <div>
         <Badge>{initDuration}</Badge>
-        {warmInvocationsDuration.map(invocation => <Badge color={"orange"}>{invocation}ms</Badge>)}
+        {/* {warmInvocationsDuration.map(invocation => <Badge color={"orange"}>{invocation}ms</Badge>)} */}
         {/* {getBadges} */}
     </div>
   )
