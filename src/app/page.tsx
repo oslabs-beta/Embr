@@ -54,6 +54,7 @@ const home = async () => {
           <Functionrow funcName = { nameArray[3] } />
           </Flex>
         </Flex>
+
       </div>
     </>
   );
