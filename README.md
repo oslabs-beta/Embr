@@ -5,18 +5,18 @@
 There are applications that address the cold start problem, but none provide a dynamic, hands-free approach without developers either contributing some amount of time or money. As Lambda users ourselves, we sought out to create an autonomous application that tracks an app’s Lambda usage and automatically sends warming calls to cold Lambdas before high-use periods. Oh yeah, and it's available for FREE! 
 
 In the making of this application, we learned a few things about AWS Lambda that all Lambda developers should know and consider:
-  - Lambdas go cold after 15 minutes of no use
-  - Billing occurs by multiplying duration time by RAM allocated to the function
-  - If a cold Lambda is invoked, the duration time increases and the bill goes up
+  - Lambdas go cold after 40-60 (aproximately) minutes of no use 
+  - Billing occurs by multiplying function runtime by RAM allocated to the function
+  - If a cold Lambda is invoked, an execution environment needs to be spun up which delays the function invocation
   - If there are concurrent calls to a cold function, the duration time is multiplied by each call
-  - The longer the function stays cold, the more money a dev can save IF it is warmed at an optimal time
+  - The longer the function stays cold / concurrent calls are made, the longer users have to wait
 
 This application is for the developer that wants to optimize their application by getting the biggest bang for their buck and saving as much time as possible.
 
 # Description
 - What the app does
     - Ember connects to a user's AWS account and provides an easy-to-read interface of all user Lambda functions
-    - It tracks and graphs core pieces of data that are used to calculate and execute warming calls
+    - It tracks and graphs metrics relevant to cold calls and warm calls
     - It offers a button for the user to manually warm their function if they wish
 - Why we used the tech we did
     - Cloudwatch provides necessary metadata of Lambdas that we plug into algorithms to find optimal warming times.
@@ -33,12 +33,12 @@ This application is for the developer that wants to optimize their application b
  3. Once added, change directory to Ember and run npm install
  4. Install latest version of AWS CLI
     - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html 
- 5. In the terminal, run aws configure (add your access information to AWS)
+ 5. In the terminal, run 'aws configure' (add your access information to AWS)
     - AWS Access Key ID [****************MBI3]: 
     - AWS Secret Access Key [****************siUL]: 
     - Default region name [xx-xxxx-x]: 
     - Default output format [None]: 
- 6. Run Npm run dev
+ 6. Run 'npm run dev'
  7. View the app at localhost:3000
 
 # How to use the project
