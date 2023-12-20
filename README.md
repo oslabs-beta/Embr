@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Ember: An application for developers using AWS Lambda to lessen the impact of cold starts (on time and budget)
 
-First, run the development server:
+# Overview
+There are applications that address the cold start problem, but none provide a dynamic, hands-free approach without developers either contributing some amount of time or money. As Lambda users ourselves, we sought out to create an autonomous application that tracks an app’s Lambda usage and automatically sends warming calls to cold Lambdas before high-use periods. Oh yeah, and it's available for FREE! 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+In the making of this application, we learned a few things about AWS Lambda that all Lambda developers should know and consider:
+  - Lambdas go cold after 40-60 (aproximately) minutes of no use 
+  - Billing occurs by multiplying function runtime by RAM allocated to the function
+  - If a cold Lambda is invoked, an execution environment needs to be spun up which delays the function invocation
+  - If there are concurrent calls to a cold function, the duration time is multiplied by each call
+  - The longer the function stays cold / concurrent calls are made, the longer users have to wait
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This application is for the developer that wants to optimize their application by getting the biggest bang for their buck and saving as much time as possible.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Description
+- What the app does
+    - Ember connects to a user's AWS account and provides an easy-to-read interface of all user Lambda functions
+    - It tracks and graphs metrics relevant to cold calls and warm calls
+    - It offers a button for the user to manually warm their function if they wish
+- Why we used the tech we did
+    - Cloudwatch provides necessary metadata of Lambdas that we plug into algorithms to find optimal warming times.
+    - Next.js offers developers the flexibility to choose how different parts of the application are rendered, whether it's server-side or client-side. This allows quicker load times when possible.
+    - Tremor offers the ability to create unique and engaging graphs for our data.
+- Some features we hope to implement
+    - In the future, we would like to implement a feature that allows a user's application to send a warming call to a server in the region where high-volume is expected to occur.
+    - We would also like the app to be hosted by AWS itself instead of an application that is hosted from the developers local host. 
+    - We also want to send notifications to the developer to let them know if there is atypical activity with Lambda use. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# How to install and run the project
+ 1. Fork the repo 
+ 2. Copy forked URL and clone on local machine
+ 3. Once added, change directory to Ember and run npm install
+ 4. Install latest version of AWS CLI
+    - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html 
+ 5. In the terminal, run 'aws configure' (add your access information to AWS)
+    - AWS Access Key ID [****************MBI3]: 
+    - AWS Secret Access Key [****************siUL]: 
+    - Default region name [xx-xxxx-x]: 
+    - Default output format [None]: 
+ 6. Run 'npm run dev'
+ 7. View the app at localhost:3000
 
-## Learn More
+# How to use the project
+To use this app, click around to see the data that your Lambda functions produce. If you want, you can even hit the warm button to send a warming call to Lambda. Otherwise, sit back, relax, and monitor at your convenience.
 
-To learn more about Next.js, take a look at the following resources:
+# Include credits
+ - Andrew Sobattka - <a href='https://www.linkedin.com/in/andrewsobottka/'>Linkedin</a>  | <a href='https://github.com/andrewsobottka'>Github</a> 
+ - Chris Bock - <a href='https://www.linkedin.com/in/christopher-j-bock/'>Linkedin</a> | <a href='https://github.com/josebock02'>Github</a> 
+ - David Tung - <a href='https://www.linkedin.com/in/yuhsuantung/'>Linkedin</a>  | <a href='https://github.com/Davidasahi'>Github</a> 
+ - Jade Majed BuGhanem - <a href='https://www.linkedin.com/in/jade-majed-boughanem-6b2a79b8/'>Linkedin</a>  | <a href='https://github.com/majedbg'>Github</a> 
+ - Titan Tran - <a href='https://www.linkedin.com/in/titantran/'>Linkedin</a>  | <a href='https://github.com/titrn'>Github</a> 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Licenses
+Ember is distributed under the MIT License.
