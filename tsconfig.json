@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     "src/app/home/dataPage/button1.jsx",
     "src/app/home/dataPage/page.tsx"
-  ],
+, "src/app/api/send/route.tsx"  ],
   "exclude": ["node_modules"]
 }
