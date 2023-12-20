@@ -1,21 +1,29 @@
 import { EmailTemplate } from '../../components/email-template';
 import { CreateEmailOptions } from '../../../../node_modules/resend/build/src/emails/interfaces/create-email-options.interface.d';
 import { Resend } from 'resend';
-require('dotenv').config();
+import 'dotenv/config';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST() {
+export async function POST(request: any) {
   try {
+    const body = await request.json();
+    console.log('Body from route.tsx: ', body);
+    const { name, Email } = body;
     const data = await resend.emails.send({
       from: 'ember <ember@majed.studio>',
       to: ['maple11303@gmail.com'],
-      subject: 'Hello world',
+      subject: 'Hello',
       react: EmailTemplate({ firstName: 'John' }),
     } as CreateEmailOptions);
 
+    if (data.status === 'success') {
+      return Response.json({ message: 'Email Successfully Sent!' });
+    }
+
     return Response.json(data);
   } catch (error) {
+    console.log('error: ', error);
     return Response.json({ error });
   }
 }
