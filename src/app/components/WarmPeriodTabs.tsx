@@ -50,23 +50,23 @@ const mockInitInfo = [
   },
 ];
 
-const WarmPeriodTabs = () => {
+const WarmPeriodTabs = ({ dataIndex }) => {
 
   return (
     <Card className='p-1 m-0'>
       {/* <Text>Warm execution contexts</Text> */}
       <TabGroup>
         <TabList className="mt-0">
-          <Tab className='p-1'>{mockInitInfo[0].timestamp.slice(0,9)}</Tab>
-          <Tab className='p-1'>{mockInitInfo[1].timestamp.slice(0,9)}</Tab>
+          <Tab className='p-1'>{mockInitInfo[dataIndex].timestamp.slice(0,9)}</Tab>
+          <Tab className='p-1'>{mockInitInfo[dataIndex+1].timestamp.slice(0,9)}</Tab>
         </TabList>
         <TabPanels className="p-1">
           <TabPanel className="p-0 m-0">
-                <LineChart oneData={ mockInitInfo[0] }></LineChart>
+                <LineChart oneData={ mockInitInfo[dataIndex] }></LineChart>
           </TabPanel>
           <TabPanel className="p-0 m-0">
             <div className="p-1 mt-0">
-                <LineChart oneData={ mockInitInfo[1] }></LineChart>
+                <LineChart oneData={ mockInitInfo[dataIndex+1] }></LineChart>
             </div>
           </TabPanel>
         </TabPanels>

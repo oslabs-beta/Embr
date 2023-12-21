@@ -104,7 +104,7 @@ const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur } ) => {
       </Card>
       <Card className='p-1 max-w-45 max-h-15 '>
         {/* <Badges initInfo={initInfo}/> */}
-        <WarmPeriodTabs></WarmPeriodTabs>
+        <WarmPeriodTabs dataIndex={ dataIndex }></WarmPeriodTabs>
       </Card>
       <Flex flexDirection='col' className='w-96'>
         <Card
