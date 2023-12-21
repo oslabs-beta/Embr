@@ -27,7 +27,7 @@ This application is for the developer that wants to optimize their application b
     - We would also like the app to be hosted by AWS itself instead of an application that is hosted from the developers local host. 
     - We also want to send notifications to the developer to let them know if there is atypical activity with Lambda use. 
 
-# How to install and run the project
+# How to install and run Ember
  1. Fork the repo 
  2. Copy forked URL and clone on local machine
  3. Once added, change directory to Ember and run npm install
