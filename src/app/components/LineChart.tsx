@@ -3,6 +3,7 @@ import { Card, Metric, Text, Divider, AreaChart } from '@tremor/react';
 
   const LineChart = ({ oneData }) => {
 
+  
     const valueFormatter = (number: number | bigint) => `${Intl.NumberFormat('us').format(number).toString()} ms`;
 
     const formatter = (info) => {
