@@ -109,7 +109,7 @@ const functionrow = async ( { funcName } ) => {
 
   return (
     <div style={{
-      // backgroundColor: 'gray';
+      width: '70vw',
     }}>
 
     <Flex flexDirection='row'>
