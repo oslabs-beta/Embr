@@ -1,4 +1,19 @@
-import { Accordion, AccordionBody, AccordionHeader } from '@tremor/react';
+import { 
+  Accordion,
+   AccordionBody, 
+   AccordionHeader,
+   Card,
+   Flex,
+   Metric,
+   ProgressBar,
+   Tab,
+   TabGroup,
+   TabList,
+   TabPanel,
+   TabPanels,
+   Text } from '@tremor/react';
+
+import { UserGroupIcon, UserIcon } from "@heroicons/react/solid";
 import LineChart from './LineChart';
 import ourData from './data'
 

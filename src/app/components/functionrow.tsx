@@ -18,7 +18,9 @@ import {
   Metric,
   BarList,
   Badge,
-  AccordionList
+  AccordionList,
+  Grid, 
+  Col
 
 } from '@tremor/react';
 import allAccordionArray from './Accordions';
@@ -30,6 +32,7 @@ import GetData from '../home/dataPage/page'
 //AWS Cloudwatch start and get query imports
 import { CloudWatchLogsClient, StartQueryCommand, GetQueryResultsCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
 import { LambdaClient, ListFunctionsCommand } from "@aws-sdk/client-lambda";
+import { Grey_Qo } from 'next/font/google';
 
 //___AWS_Start query: creates the query on AWS and returns response of queryId
 const startQueryFunc = async function(funcName) {
@@ -103,51 +106,52 @@ const functionrow = async ( { funcName } ) => {
   const averageInitDuration = 200;
   //below var removes '/aws/lambda/' from the function name. eg '/aws/lambda/myLambda' ==> 'myLambda'
   const funcNameSliced = funcName.slice(12);
+
   return (
-    <Flex flexDirection='col'>
-      {/* <div className='flex flex-row items-center'> */}
-        <Card className='p-1'
-          style={{
-            minWidth: '65rem',
-            borderRadius: '15px',
-            border: '2px solid grey',
-          }}
-          decorationColor='gray'
+    <div style={{
+      // backgroundColor: 'gray';
+    }}>
+
+    <Flex flexDirection='row'>
+      <Card className='p-1'
+        style={{
+          minWidth: '4rem',
+          borderRadius: '15px',
+          // border: '2px solid grey',
+          maxWidth: '15rem',
+          // overflow: 'hidden',
+          // textOverflow: 'ellipsis',
+          // whiteSpace: 'nowrap',
+        }}
+        decorationColor='gray'
         >
-          <Flex>
-            <Card className='max-w-4'>
-              <Title>{funcNameSliced}</Title>
-            </Card>
-            <Card className='p-1 max-w-45 max-h-15 '>
-              {/* <Badges initInfo={initInfo}/> */}
-              <WarmPeriodTabs></WarmPeriodTabs>
-            </Card>
-            <Flex flexDirection='col' className='w-96'>
-              <Card
-                decoration='left'
-                decorationColor='blue'
-                className='max-w-xs'
-              >
-                <Metric>{averageColdCalls}</Metric>
-                <Text>cold calls /week</Text>
-              </Card>
-              <Card
-                decoration='left'
-                decorationColor='blue'
-                className='max-w-xs'
-              >
-                {/* <Metric>{initInfo}</Metric> */}
-                <Text>average cold start</Text>
-              </Card>
-            </Flex>
-            <WarmButton buttonName={'Warm'} />
-          </Flex>
-          {/* <AccordionList className='max-w-md mx-auto'>
-          { allAccordionArray }
-        </AccordionList> */}
+        <Title>{funcNameSliced}</Title>
+      </Card>
+      <Card className='p-1 max-w-45 max-h-15 '>
+        {/* <Badges initInfo={initInfo}/> */}
+        <WarmPeriodTabs></WarmPeriodTabs>
+      </Card>
+      <Flex flexDirection='col' className='w-96'>
+        <Card
+          decoration='left'
+          decorationColor='blue'
+          className='max-w-xs'
+          >
+          <Metric>{averageColdCalls}</Metric>
+          <Text>cold calls /week</Text>
         </Card>
-      {/* </div> */}
+        <Card
+          decoration='left'
+          decorationColor='blue'
+          className='max-w-xs'
+          >
+                {/* <Metric>{initInfo}</Metric> */}
+          <Text>average cold start</Text>
+        </Card>
+      </Flex>
+      <WarmButton buttonName={'Warm'} />
     </Flex>
+  </div>
   );
 };
 
