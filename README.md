@@ -2,7 +2,7 @@
 # Ember: An application for developers using AWS Lambda to lessen the impact of cold starts (on time and budget)
 
 # Overview
-There are applications that address the cold start problem, but none provide a dynamic, hands-free approach without developers either contributing some amount of time or money. As Lambda users ourselves, we sought out to create an autonomous application that tracks an app’s Lambda usage and automatically sends warming calls to cold Lambdas before high-use periods. Oh yeah, and it's available for FREE! 
+There are applications that address the cold start problem, but none provide a dynamic, hands-free approach without developers either contributing some amount of time or money. As Lambda users ourselves, we sought out to create an autonomous application that tracks an app’s Lambda usage and automatically sends warming calls to cold Lambdas before high-use periods. Oh yeah, and something for FREE! 
 
 In the making of this application, we learned a few things about AWS Lambda that all Lambda developers should know and consider:
   - Lambdas go cold after 40-60 (aproximately) minutes of no use 
