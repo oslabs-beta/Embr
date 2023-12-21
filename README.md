@@ -27,7 +27,7 @@ This application is for the developer that wants to optimize their application b
     - We would also like the app to be hosted by AWS itself instead of an application that is hosted from the developers local host. 
     - We also want to send notifications to the developer to let them know if there is atypical activity with Lambda use. 
 
-# How to install and run the project
+# How to install and run Ember
  1. Fork the repo 
  2. Copy forked URL and clone on local machine
  3. Once added, change directory to Ember and run npm install
@@ -44,7 +44,7 @@ This application is for the developer that wants to optimize their application b
 # How to use the project
 To use this app, click around to see the data that your Lambda functions produce. If you want, you can even hit the warm button to send a warming call to Lambda. Otherwise, sit back, relax, and monitor at your convenience.
 
-# Include credits
+# Credits
  - Andrew Sobattka - <a href='https://www.linkedin.com/in/andrewsobottka/'>Linkedin</a>  | <a href='https://github.com/andrewsobottka'>Github</a> 
  - Chris Bock - <a href='https://www.linkedin.com/in/christopher-j-bock/'>Linkedin</a> | <a href='https://github.com/josebock02'>Github</a> 
  - David Tung - <a href='https://www.linkedin.com/in/yuhsuantung/'>Linkedin</a>  | <a href='https://github.com/Davidasahi'>Github</a> 
