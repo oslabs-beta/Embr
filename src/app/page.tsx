@@ -35,25 +35,28 @@ const home = async () => {
 
   let nameArray = await getLambdaNames()
   let gotResults;
-  for(let i = 0; i < nameArray.length; i++) {
-    // gotResults = await getLogs(nameArray[i]);
-    setTimeout(()=> {console.log(`${i},this is the name of the function: ${nameArray[i]}`)}, 1000)
-  }
-
 
   return (
-    <>
+    <div>
       <Navbar />
       <div className={`${styles.fullWidthContainer} relative z-0`}>
-        <Flex flexDirection='row' >
-          <Flex flexDirection='col' className="min-w-25">
-          <Functionrow funcName={ nameArray[4] } style={{padding: '4rem'}}/>
-          <Functionrow funcName = { nameArray[3] } />
-          </Flex>
+        <Flex flexDirection='row' justifyContent='center'>
+          <div style={{
+            maxWidth:'77vw', 
+            boxShadow: '0px 0px 40px gray', 
+            padding: '4vh 4vw 0 4vw'
+            }}>
+            <Flex flexDirection='col' className="min-w-25" style={{}}>
+              <Functionrow funcName = { nameArray[0] } avgColdCalls={'8'} avgColdstartDur={'181'}style={{}}/>
+              <Functionrow funcName = { nameArray[3] } avgColdCalls={'2'} avgColdstartDur={'153'}/>
+              <Functionrow funcName = { nameArray[4] } avgColdCalls={'12'} avgColdstartDur={'144'}/>
+              <Functionrow funcName = { nameArray[1] } avgColdCalls={'4'} avgColdstartDur={'198'}/>
+            </Flex>
+          </div>
         </Flex>
 
       </div>
-    </>
+    </div>
   );
 };
 
