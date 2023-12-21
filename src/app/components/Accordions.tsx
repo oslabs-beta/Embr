@@ -1,4 +1,19 @@
-import { Accordion, AccordionBody, AccordionHeader } from '@tremor/react';
+import { 
+  Accordion,
+   AccordionBody, 
+   AccordionHeader,
+   Card,
+   Flex,
+   Metric,
+   ProgressBar,
+   Tab,
+   TabGroup,
+   TabList,
+   TabPanel,
+   TabPanels,
+   Text } from '@tremor/react';
+
+import { UserGroupIcon, UserIcon } from "@heroicons/react/solid";
 import LineChart from './LineChart';
 
 const mockInitInfo = [
@@ -34,17 +49,49 @@ const mockInitInfo = [
   },
 ];
 
-const SingleAccordion = ({currentDay}) => {
+const SingleAccordion = ({ oneData, currentDay}) => {
+  const mockInitInfo = oneData;
   const linechartsArray = [];
   for (let i = 0; i < mockInitInfo.length; i++) {
-    if (mockInitInfo[i].day === currentDay) linechartsArray.push(<LineChart oneData={mockInitInfo[i]}></LineChart>);
+    if (mockInitInfo[i].day === currentDay) linechartsArray.push(<LineChart oneData={mockInitInfo[i]} coldStartTimestamp={'coldstartTimeStamp'}></LineChart>);
   }
 
   return (
-    <Accordion>
-      <AccordionHeader>Accordion {currentDay}</AccordionHeader>
-      <AccordionBody>{linechartsArray}</AccordionBody>
-    </Accordion>
+    <>
+    <TabGroup>
+        <TabList className="mt-8">
+          <Tab icon={UserGroupIcon}>Chart A</Tab>
+          <Tab icon={UserIcon}>Chart B</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <div className="mt-10">
+              <Flex className="mt-4">
+                <Text className="w-full">Product Y</Text>
+                <Flex className="space-x-2" justifyContent="end">
+                  <Text>$ 108,799</Text>
+                  <Text>38%</Text>
+                </Flex>
+              </Flex>
+              {linechartsArray[0]}
+              <ProgressBar value={38} className="mt-2" />
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="mt-10">
+              <Flex className="mt-4">
+                <Text className="w-full">Product Z</Text>
+                <Flex className="space-x-2" justifyContent="end">
+                  <Text>$ 99,484</Text>
+                  <Text>16%</Text>
+                </Flex>
+              </Flex>
+              <ProgressBar value={12} className="mt-2" />
+            </div>
+          </TabPanel>
+        </TabPanels>
+      </TabGroup>
+    </>
   );
 };
 
