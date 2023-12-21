@@ -1,0 +1,65 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+}
+
+.fullWidthContainer {
+  width: 100vw;
+  position: relative;
+}
+
+.about {
+  color: black;
+}
+
+/*For Email page*/
+.email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  height: 100vh; /* Adjust the height as needed */
+  background-color: #f5f5f5; /* Light gray background color */
+}
+
+.email p {
+  font-size: 24px;
+  color: #333; /* Dark gray text color */
+  margin-bottom: 20px;
+}
+
+.email form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px; /* Adjust the width as needed */
+}
+
+.email form label {
+  font-size: 16px;
+  color: #555; /* Medium gray text color */
+  margin-bottom: 10px;
+}
+
+.email form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc; /* Light gray border */
+}
+
+.email form button {
+  padding: 10px 20px;
+  background-color: #555; /* Medium gray button background color */
+  color: #fff; /* White button text color */
+  border: none;
+  cursor: pointer;
+}
+
+.email form button:hover {
+  background-color: #333; /* Dark gray button background color on hover */
+}

@@ -1,0 +1,37 @@
+{
+  "name": "primary-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "^3.476.0",
+    "@aws-sdk/client-lambda": "^3.474.0",
+    "@heroicons/react": "^1.0.6",
+    "@tremor/react": "^3.11.1",
+    "aws": "^0.0.3-2",
+    "aws-sdk": "^2.1520.0",
+    "dotenv": "^16.3.1",
+    "next": "^14.0.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.12.0",
+    "resend": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
