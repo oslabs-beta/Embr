@@ -44,7 +44,7 @@ This application is for the developer that wants to optimize their application b
 # How to use the project
 To use this app, click around to see the data that your Lambda functions produce. If you want, you can even hit the warm button to send a warming call to Lambda. Otherwise, sit back, relax, and monitor at your convenience.
 
-# Include credits
+# Credits
  - Andrew Sobattka - <a href='https://www.linkedin.com/in/andrewsobottka/'>Linkedin</a>  | <a href='https://github.com/andrewsobottka'>Github</a> 
  - Chris Bock - <a href='https://www.linkedin.com/in/christopher-j-bock/'>Linkedin</a> | <a href='https://github.com/josebock02'>Github</a> 
  - David Tung - <a href='https://www.linkedin.com/in/yuhsuantung/'>Linkedin</a>  | <a href='https://github.com/Davidasahi'>Github</a> 
