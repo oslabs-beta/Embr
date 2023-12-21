@@ -5,7 +5,6 @@ import styles from '../page.module.css';
 import Navbar from '../components/Navbar';
 import { toast } from 'react-hot-toast';
 
-
 const Contact = () => {
   const [data, setData] = useState({
     name: '',
@@ -35,7 +34,7 @@ const Contact = () => {
     <div>
       <Navbar />
       <div className={styles.contact}>
-        <p>Contact Us</p>
+        <p>Please provide your name and Email!</p>
         <form onSubmit={sendEmail}>
           <label>
             Name:
