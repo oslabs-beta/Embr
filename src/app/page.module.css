@@ -63,25 +63,3 @@
 .email form button:hover {
   background-color: #333; /* Dark gray button background color on hover */
 }
-
-/*For Email template*/
-.tableContainer {
-  margin-top: 20px;
-}
-
-.emailTable {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.emailTable th,
-.emailTable td {
-  border: 1px solid #dddddd6a;
-  padding: 8px;
-  text-align: left;
-}
-
-.emailTable th {
-  background-color: #dddddd6a;
-}

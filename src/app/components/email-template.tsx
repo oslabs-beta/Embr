@@ -130,6 +130,15 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
                   textAlign: 'left',
                 }}
               >
+                30
+              </td>
+              <td
+                style={{
+                  border: '1px solid #ddd',
+                  padding: '8px',
+                  textAlign: 'left',
+                }}
+              >
                 200ms
               </td>
             </tr>
