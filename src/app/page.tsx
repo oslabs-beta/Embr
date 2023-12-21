@@ -47,10 +47,10 @@ const home = async () => {
             padding: '4vh 4vw 0 4vw'
             }}>
             <Flex flexDirection='col' className="min-w-25" style={{}}>
-              <Functionrow funcName = { nameArray[0] } avgColdCalls={'8'} avgColdstartDur={'181'}style={{}}/>
-              <Functionrow funcName = { nameArray[3] } avgColdCalls={'2'} avgColdstartDur={'153'}/>
-              <Functionrow funcName = { nameArray[4] } avgColdCalls={'12'} avgColdstartDur={'144'}/>
-              <Functionrow funcName = { nameArray[1] } avgColdCalls={'4'} avgColdstartDur={'198'}/>
+              <Functionrow funcName = { nameArray[0] } avgColdCalls={'8'}  avgColdstartDur={'168'} dataIndex={0}/>
+              <Functionrow funcName = { nameArray[3] } avgColdCalls={'2'}  avgColdstartDur={'171'} dataIndex={2}/>
+              <Functionrow funcName = { nameArray[4] } avgColdCalls={'12'} avgColdstartDur={'112'} dataIndex={4}/>
+              <Functionrow funcName = { nameArray[1] } avgColdCalls={'4'}  avgColdstartDur={'115'} dataIndex={6}/>
             </Flex>
           </div>
         </Flex>

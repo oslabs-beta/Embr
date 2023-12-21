@@ -13,7 +13,7 @@ import {
 
   const LineChart = ({ oneData }) => {
 
-    const valueFormatter = (number: number | bigint) => `${Intl.NumberFormat('us').format(number).toString()} ms`;
+    const valueFormatter = (number: number | bigint) => `${Intl.NumberFormat('us').format(number).toString()}`;
     
     //Takes in log object and creates a graph point for each warm invocation
     const formatter = (info) => {
@@ -34,7 +34,7 @@ import {
     const data = formatter(oneData);
     return (<>
         <Text>{oneData.timestamp.slice(oneData.timestamp.indexOf(' ') + 1, oneData.timestamp.indexOf('.') - 3)}</Text>
-        <Text>cold start: {oneData.initDuration}ms </Text>
+        <Text>cold start: {oneData.initDuration} </Text>
         <AreaChart
           className='mt-8 h-44'
           data={data}
@@ -44,7 +44,7 @@ import {
           valueFormatter={valueFormatter}
           yAxisWidth={30}
           showYAxis={true}
-          showXAxis={false}
+          // showXAxis={false}
           showLegend={true}
           />
         </>

@@ -66,7 +66,7 @@ const getLogs = async function( funcName ) {
   //setTimeout gives AWS some time to run the query.
 }
 //receives prop funcName and destructures it
-const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur } ) => {
+const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur , dataIndex } ) => {
   let initInfo = [{
     timestamp: '2023-12-14 18:18:43.243',
     initDuration: '181.02',
@@ -104,7 +104,7 @@ const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur } ) => {
       </Card>
       <Card className='p-1 max-w-45 max-h-15 '>
         {/* <Badges initInfo={initInfo}/> */}
-        <WarmPeriodTabs></WarmPeriodTabs>
+        <WarmPeriodTabs dataIndex={ dataIndex }></WarmPeriodTabs>
       </Card>
       <Flex flexDirection='col' className='w-96'>
         <Card
