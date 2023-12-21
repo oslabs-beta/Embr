@@ -45,11 +45,17 @@ const home = async () => {
     <>
       <Navbar />
       <div className={`${styles.fullWidthContainer} relative z-0`}>
-        <Flex flexDirection='row' >
-          <Flex flexDirection='col' className="min-w-25">
-          <Functionrow funcName={ nameArray[4] } style={{padding: '4rem'}}/>
-          <Functionrow funcName = { nameArray[3] } />
-          </Flex>
+        <Flex flexDirection='row' justifyContent='center'>
+          <div style={{
+            maxWidth:'77vw', 
+            boxShadow: '0px 0px 40px gray', 
+            padding: '4vh 4vw 0 4vw'
+            }}>
+            <Flex flexDirection='col' className="min-w-25" style={{}}>
+              <Functionrow funcName={ nameArray[4] } style={{}}/>
+              <Functionrow funcName = { nameArray[3] } />
+            </Flex>
+          </div>
         </Flex>
 
       </div>
