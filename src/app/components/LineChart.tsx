@@ -12,6 +12,7 @@ import {
   TabPanel } from '@tremor/react';
 
   const LineChart = ({ oneData }) => {
+
     const valueFormatter = (number: number | bigint) => `${Intl.NumberFormat('us').format(number).toString()} ms`;
     
     //Takes in log object and creates a graph point for each warm invocation
