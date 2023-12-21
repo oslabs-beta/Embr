@@ -66,7 +66,7 @@ const getLogs = async function( funcName ) {
   //setTimeout gives AWS some time to run the query.
 }
 //receives prop funcName and destructures it
-const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur } ) => {
+const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur , dataIndex } ) => {
   let initInfo = [{
     timestamp: '2023-12-14 18:18:43.243',
     initDuration: '181.02',
