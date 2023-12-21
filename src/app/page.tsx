@@ -37,7 +37,7 @@ const home = async () => {
   let gotResults;
 
   return (
-    <>
+    <div>
       <Navbar />
       <div className={`${styles.fullWidthContainer} relative z-0`}>
         <Flex flexDirection='row' justifyContent='center'>
@@ -56,7 +56,7 @@ const home = async () => {
         </Flex>
 
       </div>
-    </>
+    </div>
   );
 };
 
