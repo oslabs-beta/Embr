@@ -1,11 +1,11 @@
 'use client';
-//src/app/contact/page.tsx
+//src/app/email/page.tsx
 import React, { useState } from 'react';
 import styles from '../page.module.css';
 import Navbar from '../components/Navbar';
 import { toast } from 'react-hot-toast';
 
-const Contact = () => {
+const Email = () => {
   const [data, setData] = useState({
     name: '',
     email: '',
@@ -26,14 +26,14 @@ const Contact = () => {
         name: '',
         email: '',
       });
-      toast.success(`Hey, ${data.name}, your message was snet successfully!`);
+      toast.success(`Hey, ${data.name}, your message was sent successfully!`);
     }
   };
 
   return (
     <div>
       <Navbar />
-      <div className={styles.contact}>
+      <div className={styles.email}>
         <p>Please provide your name and Email!</p>
         <form onSubmit={sendEmail}>
           <label>
@@ -61,4 +61,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Email;

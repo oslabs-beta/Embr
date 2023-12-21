@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SiAwslambda } from 'react-icons/si';
 import { RiFunctionFill } from 'react-icons/ri';
 import { IoHomeOutline } from 'react-icons/io5';
+import { MdOutlineMarkEmailRead } from 'react-icons/md';
 
 const Navbar = () => {
   return (
@@ -22,6 +23,12 @@ const Navbar = () => {
               <RiFunctionFill style={{ marginRight: '8px' }} />
               <Link href="/">
                 <p>Function</p>
+              </Link>
+            </li>
+            <li style={{ display: 'flex', alignItems: 'center' }}>
+              <MdOutlineMarkEmailRead style={{ marginRight: '8px' }} />
+              <Link href="/email">
+                <p>Notification</p>
               </Link>
             </li>
             <li style={{ display: 'flex', alignItems: 'center' }}>
