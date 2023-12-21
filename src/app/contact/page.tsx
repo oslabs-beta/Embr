@@ -1,11 +1,10 @@
 'use client';
-
+//src/app/contact/page.tsx
 import React, { useState } from 'react';
 import styles from '../page.module.css';
 import Navbar from '../components/Navbar';
 import { toast } from 'react-hot-toast';
-import { EmailTemplate } from '../components/email-template';
-import { POST } from '../api/send/route';
+
 
 const Contact = () => {
   const [data, setData] = useState({

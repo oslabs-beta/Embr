@@ -22,37 +22,14 @@ import {
 
 } from '@tremor/react';
 import allAccordionArray from './Accordions';
+import WarmPeriodTabs from './WarmPeriodTabs';
 import { allowedNodeEnvironmentFlags } from 'process';
 ``;
 import GetData from '../home/dataPage/page'
 
 //AWS Cloudwatch start and get query imports
 import { CloudWatchLogsClient, StartQueryCommand, GetQueryResultsCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
-
 import { LambdaClient, ListFunctionsCommand } from "@aws-sdk/client-lambda";
-
-const getLambdaNames = async () => {
-
-  const listFunctions = async () => {
-    const client = new LambdaClient({});
-    const input = {
-      MasterRegion: 'us-east-2',
-      FunctionVersion: 'ALL',
-      MaxItems: Number('10')
-    }
-    const command = new ListFunctionsCommand({input});
-    const response = await client.send(command);
-    return response
-
-  };
-  const data = await listFunctions()
-  const dataList = data['Functions']
-  const nameArray = []
-  for(let i = 0; i < dataList.length; i++){
-    nameArray.push(`/aws/lambda/${dataList[i]['FunctionName']}`)
-  }
-  return nameArray
-}
 
 //___AWS_Start query: creates the query on AWS and returns response of queryId
 const startQueryFunc = async function(funcName) {
@@ -89,23 +66,23 @@ const getQueryFunc = async function (queryId) {
 }
 
 //calls startQuery and getQuery sequentially and does some data manipulation.
-const getLogs = async function(funcName) {
+const getLogs = async function( funcName ) {
   const QueryStartResults = await startQueryFunc(funcName);
   const queryId = QueryStartResults.queryId;
   // console.log('V3startQuery:',QueryStartResults);
   // console.log('QueryId:',queryId);
   const initialQueryGetResults = await getQueryFunc(queryId);
-  console.log('initialQuery',initialQueryGetResults);
+  // console.log('initialQuery',initialQueryGetResults);
   setTimeout(async () => {
     let delayedQueryGetResults = await getQueryFunc(queryId); 
-    console.log(delayedQueryGetResults.results);
+    // console.log(delayedQueryGetResults.results);
     return delayedQueryGetResults.results
   }, 2000);
   //status goes from Scheduled, to Running, to Complete. or Failed/cancelled/timeout/unknown. see https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html 
   //setTimeout gives AWS some time to run the query.
 }
-
-const functionrow = async () => {
+//receives prop funcName and destructures it
+const functionrow = async ( { funcName } ) => {
   let initInfo = [{
     timestamp: '2023-12-14 18:18:43.243',
     initDuration: '181.02',
@@ -118,37 +95,32 @@ const functionrow = async () => {
     warmInvocationsDuration: ['11.04', '1.91', '2.36', '1.92', '1.36'],
     day: '2023-12-14',
   }];
-  let nameArray = await getLambdaNames()
-  let gotResults;
-  for(let i = 0; i < nameArray.length; i++) {
-    gotResults = await getLogs(nameArray[i])
-    setTimeout(()=> {console.log(`this is the name of the function: ${nameArray[i]}: `, gotResults)}, 2000)
-  }
-  // const gotResults = await getLogs();
+  const gotResults = await getLogs(funcName);
 
-
-  //const gotResults = await getLogs();
   // const initInfo = await getInitInfo(gotResults);
   const badges = [];
   const averageColdCalls = 40;
   const averageInitDuration = 200;
+  //below var removes '/aws/lambda/' from the function name. eg '/aws/lambda/myLambda' ==> 'myLambda'
+  const funcNameSliced = funcName.slice(12);
   return (
     <Flex flexDirection='col'>
-      <div className='flex flex-row items-center'>
-        <Card
+      {/* <div className='flex flex-row items-center'> */}
+        <Card className='p-1'
           style={{
-            minWidth: '75rem',
+            minWidth: '65rem',
             borderRadius: '15px',
             border: '2px solid grey',
           }}
           decorationColor='gray'
         >
           <Flex>
-            <Card className='max-w-xs'>
-              <Title>Lambda Function</Title>
+            <Card className='max-w-4'>
+              <Title>{funcNameSliced}</Title>
             </Card>
-            <Card className='max-w-sm'>
+            <Card className='p-1 max-w-45 max-h-15 '>
               {/* <Badges initInfo={initInfo}/> */}
+              <WarmPeriodTabs></WarmPeriodTabs>
             </Card>
             <Flex flexDirection='col' className='w-96'>
               <Card
@@ -170,11 +142,11 @@ const functionrow = async () => {
             </Flex>
             <WarmButton buttonName={'Warm'} />
           </Flex>
-          <AccordionList className='max-w-md mx-auto'>
+          {/* <AccordionList className='max-w-md mx-auto'>
           { allAccordionArray }
-        </AccordionList>
+        </AccordionList> */}
         </Card>
-      </div>
+      {/* </div> */}
     </Flex>
   );
 };

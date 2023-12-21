@@ -1,3 +1,4 @@
+//src/app/api/send/route.tsx
 import { EmailTemplate } from '../../components/email-template';
 import { CreateEmailOptions } from '../../../../node_modules/resend/build/src/emails/interfaces/create-email-options.interface.d';
 import { Resend } from 'resend';
@@ -9,12 +10,12 @@ export async function POST(request: any) {
   try {
     const body = await request.json();
     console.log('Body from route.tsx: ', body);
-    const { name, Email } = body;
+    const { name, email } = body;
     const data = await resend.emails.send({
       from: 'ember <ember@majed.studio>',
-      to: ['maple11303@gmail.com'],
+      to: [`${email}`],
       subject: 'Hello',
-      react: EmailTemplate({ firstName: 'John' }),
+      react: <EmailTemplate Name={name} />,
     } as CreateEmailOptions);
 
     if (data.status === 'success') {

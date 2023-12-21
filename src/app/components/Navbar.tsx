@@ -3,8 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { SiAwslambda } from 'react-icons/si';
-import { GiAmberMosquito } from 'react-icons/gi';
-import { IoIosContact } from 'react-icons/io';
+import { RiFunctionFill } from 'react-icons/ri';
 import { IoHomeOutline } from 'react-icons/io5';
 
 const Navbar = () => {
@@ -20,15 +19,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li style={{ display: 'flex', alignItems: 'center' }}>
-              <GiAmberMosquito style={{ marginRight: '8px' }} />
-              <Link href="/about">
-                <p>About Ember</p>
-              </Link>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center' }}>
-              <IoIosContact style={{ marginRight: '8px' }} />
-              <Link href="/contact">
-                <p>Contact Us</p>
+              <RiFunctionFill style={{ marginRight: '8px' }} />
+              <Link href="/">
+                <p>Function</p>
               </Link>
             </li>
             <li style={{ display: 'flex', alignItems: 'center' }}>
