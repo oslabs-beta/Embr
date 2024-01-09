@@ -12,7 +12,7 @@ export async function POST(request: any) {
     console.log('Body from route.tsx: ', body);
     const { name, email } = body;
     const data = await resend.emails.send({
-      from: 'ember <ember@majed.studio>',
+      from: 'embr <ember@majed.studio>',
       to: [`${email}`],
       subject: 'Hello',
       react: <EmailTemplate Name={name} />,
