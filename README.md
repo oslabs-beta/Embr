@@ -1,4 +1,3 @@
-
 # Embr
 
 ## Overview
@@ -30,6 +29,7 @@ This application is for developers looking to optimize serverless function use b
 ## How to Use Embr
  1. Fork, clone, and install all dependencies
  2. Install latest version of AWS CLI
+
     - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html 
  3. Using the terminal, run 'aws configure' and add your access information to AWS - e.g.:
     - AWS Access Key ID [****************MBI3]:
