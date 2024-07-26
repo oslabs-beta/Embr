@@ -29,16 +29,16 @@ import { Grey_Qo } from 'next/font/google';
 
 //___AWS_Start query: creates the query on AWS and returns response of queryId
 const startQueryFunc = async function(funcName) {
-    const client = new CloudWatchLogsClient({region: 'us-east-2'});
-    const oneWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
-    const now = new Date();
-    const input = { // StartQueryRequest
-      logGroupName: funcName,
-  startTime: oneWeek.getTime(),
+  const client = new CloudWatchLogsClient({region: 'us-east-2'});
+  const oneWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // TODO: currently 24 hours ago, * 7 if want to change to week. unit is currently in seconds
+  const now = new Date();
+  const input = { // StartQueryRequest
+    logGroupName: funcName,
+    startTime: oneWeek.getTime(),
     endTime: now.getTime(),
     queryString:
-    'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc',
-  limit: 1,
+      'fields @ingestionTime, @initDuration, @logStream, @message, @timestamp, @type, @billedDuration, @duration, @maxMemoryUsed, @memorySize | sort @timestamp desc',
+    limit: 1,
   };
   const command = new StartQueryCommand(input);
   const response = await client.send(command);
@@ -66,7 +66,7 @@ const getLogs = async function( funcName ) {
   //setTimeout gives AWS some time to run the query.
 }
 //receives prop funcName and destructures it
-const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur } ) => {
+const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur , dataIndex } ) => {
   let initInfo = [{
     timestamp: '2023-12-14 18:18:43.243',
     initDuration: '181.02',
@@ -104,7 +104,7 @@ const functionrow = async ( { funcName , avgColdCalls , avgColdstartDur } ) => {
       </Card>
       <Card className='p-1 max-w-45 max-h-15 '>
         {/* <Badges initInfo={initInfo}/> */}
-        <WarmPeriodTabs></WarmPeriodTabs>
+        <WarmPeriodTabs dataIndex={ dataIndex }></WarmPeriodTabs>
       </Card>
       <Flex flexDirection='col' className='w-96'>
         <Card
