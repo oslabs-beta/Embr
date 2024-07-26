@@ -1,7 +1,7 @@
 'use client';
 //src/app/email/page.tsx
 import React, { useState } from 'react';
-import styles from '../page.module.css';
+import styles from './page.module.css';
 import Navbar from '../components/Navbar';
 import { toast } from 'react-hot-toast';
 
